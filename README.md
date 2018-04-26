@@ -46,7 +46,7 @@ let json = """
 """.data(using: .utf8)!
 
 let decoder = JSONDecoder()
-let dictionary = try! decoder.decode([String: AnyCodable].self, from: json)
+let dictionary = try! decoder.decode([String: AnyDecodable].self, from: json)
 ```
 
 ## AnyCodable
