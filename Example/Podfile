@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'AnyCodable_Example' do
+  pod 'AnyCodable', :path => '../'
+
+  target 'AnyCodable_Tests' do
+    inherit! :search_paths
+    pod 'AnyCodable', :path => '../'
+    
+  end
+end

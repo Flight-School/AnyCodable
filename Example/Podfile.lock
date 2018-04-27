@@ -1,0 +1,16 @@
+PODS:
+  - AnyCodable (0.1.0)
+
+DEPENDENCIES:
+  - AnyCodable (from `../`)
+
+EXTERNAL SOURCES:
+  AnyCodable:
+    :path: ../
+
+SPEC CHECKSUMS:
+  AnyCodable: 529a04b11fa98697f058c815f5a1102a697da594
+
+PODFILE CHECKSUM: 370f62a1a56f80172ba3844662e70b8fdcba2633
+
+COCOAPODS: 1.4.0
