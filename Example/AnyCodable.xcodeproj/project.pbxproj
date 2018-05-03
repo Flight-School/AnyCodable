@@ -30,8 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1259CEC95D11D2261B46EBA5 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		29447DFFD28CA2E48619FFA5 /* AnyCodable.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = AnyCodable.podspec; path = ../AnyCodable.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		29447DFFD28CA2E48619FFA5 /* AnyCodable-Swift.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = "AnyCodable-Swift.podspec"; path = "../AnyCodable-Swift.podspec"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		3A3E923E2092CF7200DEF45D /* AnyCodableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCodableTests.swift; sourceTree = "<group>"; };
 		3A3E92402092CFF900DEF45D /* AnyDecodableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyDecodableTests.swift; sourceTree = "<group>"; };
 		3A3E92422092D04600DEF45D /* AnyEncodableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyEncodableTests.swift; sourceTree = "<group>"; };
@@ -158,9 +157,8 @@
 		607FACF51AFB993E008FA782 /* Podspec Metadata */ = {
 			isa = PBXGroup;
 			children = (
-				29447DFFD28CA2E48619FFA5 /* AnyCodable.podspec */,
+				29447DFFD28CA2E48619FFA5 /* AnyCodable-Swift.podspec */,
 				80C19664ED064908B420634B /* README.md */,
-				1259CEC95D11D2261B46EBA5 /* LICENSE */,
 			);
 			name = "Podspec Metadata";
 			sourceTree = "<group>";

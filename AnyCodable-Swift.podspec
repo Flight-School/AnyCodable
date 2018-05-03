@@ -7,7 +7,7 @@
 #
 
 Pod::Spec.new do |s|
-  s.name             = 'AnyCodable'
+  s.name             = 'AnyCodable-Swift'
   s.version          = '0.1.0'
   s.summary          = 'Encodable, Decodable, and Codable'
 
@@ -23,9 +23,9 @@ Pod::Spec.new do |s|
 
   s.homepage         = 'https://github.com/Flight-School/AnyCodable'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
-  s.license          = { :type => 'MIT', :file => 'LICENSE' }
+  s.license          = { :type => 'MIT' }
   s.author           = { 'mattt' => 'mattt' }
-  s.source           = { :git => 'https://github.com/dulingkang/AnyCodable.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/Flight-School/AnyCodable.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
   s.swift_version = '4.1'
   s.ios.deployment_target = '8.0'
