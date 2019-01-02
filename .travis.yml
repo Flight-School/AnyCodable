@@ -1,0 +1,4 @@
+language: objective-c
+xcode_project: AnyCodable.xcodeproj
+xcode_scheme: AnyCodable
+xcode_destination: platform=macOs
