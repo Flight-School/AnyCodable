@@ -1,5 +1,7 @@
 # AnyCodable
 
+![Build Status](https://api.travis-ci.com/Flight-School/AnyCodable.svg?branch=master)
+
 Type-erased wrappers for `Encodable`, `Decodable`, and `Codable` values.
 
 This functionality is discussed in Chapter 3 of
