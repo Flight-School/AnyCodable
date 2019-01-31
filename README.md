@@ -1,11 +1,11 @@
 # AnyCodable
 
-![Build Status](https://api.travis-ci.com/Flight-School/AnyCodable.svg?branch=master)
+[![Build Status][build status badge]][build status]
 
 Type-erased wrappers for `Encodable`, `Decodable`, and `Codable` values.
 
 This functionality is discussed in Chapter 3 of
-[Flight School Guide to Swift Codable](https://gumroad.com/l/codable).
+[Flight School Guide to Swift Codable](https://flight.school/books/codable).
 
 ## AnyEncodable
 
@@ -62,3 +62,6 @@ MIT
 ## Contact
 
 Mattt ([@mattt](https://twitter.com/mattt))
+
+[build status]: https://travis-ci.com/Flight-School/AnyCodable
+[build status badge]: https://api.travis-ci.com/Flight-School/AnyCodable.svg?branch=master
