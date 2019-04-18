@@ -3,7 +3,7 @@ import AnyCodable
 
 let dictionary: [String: AnyEncodable] = [
     "boolean": true,
-    "integer": 1,
+    "integer": AnyEncodable(NSNumber(1)),
     "double": 3.14159265358979323846,
     "string": "string",
     "array": [1, 2, 3],
