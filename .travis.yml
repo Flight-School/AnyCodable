@@ -1,4 +1,11 @@
-language: swift
-xcode_project: AnyCodable.xcodeproj
-xcode_scheme: AnyCodable
-xcode_destination: platform=macOs
+matrix:
+  include:
+    - os: osx
+      osx_image: xcode10.2
+    - os: linux
+      dist: xenial
+      services: docker
+      env: DOCKER_IMAGE=swift:5.0.1-xenial
+
+script:
+  - swift test
