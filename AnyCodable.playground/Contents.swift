@@ -15,6 +15,9 @@ let dictionary: [String: AnyEncodable] = [
 ]
 
 let encoder = JSONEncoder()
-let json = try! encoder.encode(dictionary)
+let data = try encoder.encode(dictionary)
 
-let string = String(data: json, encoding: .utf8)
+let string = String(data: data, encoding: .utf8)
+
+let decoder = JSONDecoder()
+let object = try decoder.decode([String: AnyDecodable].self, from: data)
