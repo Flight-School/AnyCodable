@@ -1,8 +1,8 @@
-import XCTest
 @testable import AnyCodable
+import XCTest
 
 class AnyDecodableTests: XCTestCase {
-    func testJSONDecoding() {
+    func testJSONDecoding() throws {
         let json = """
         {
             "boolean": true,
@@ -17,10 +17,10 @@ class AnyDecodableTests: XCTestCase {
             }
         }
         """.data(using: .utf8)!
-        
+
         let decoder = JSONDecoder()
-        let dictionary = try! decoder.decode([String: AnyDecodable].self, from: json)
-        
+        let dictionary = try decoder.decode([String: AnyDecodable].self, from: json)
+
         XCTAssertEqual(dictionary["boolean"]?.value as! Bool, true)
         XCTAssertEqual(dictionary["integer"]?.value as! Int, 1)
         XCTAssertEqual(dictionary["double"]?.value as! Double, 3.14159265358979323846, accuracy: 0.001)
@@ -28,7 +28,7 @@ class AnyDecodableTests: XCTestCase {
         XCTAssertEqual(dictionary["array"]?.value as! [Int], [1, 2, 3])
         XCTAssertEqual(dictionary["nested"]?.value as! [String: String], ["a": "alpha", "b": "bravo", "c": "charlie"])
     }
-    
+
     static var allTests = [
         ("testJSONDecoding", testJSONDecoding),
     ]
