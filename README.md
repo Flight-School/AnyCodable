@@ -1,6 +1,6 @@
 # AnyCodable
 
-[![Build Status][build status badge]][build status]
+[![Build Status][build status badge]][build status] [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 Type-erased wrappers for `Encodable`, `Decodable`, and `Codable` values.
 

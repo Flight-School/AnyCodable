@@ -1,4 +1,12 @@
 .DS_Store
 /.build
 /Packages
-/*.xcodeproj
+xcuserdata/
+DeriveredData/
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+!*.xcworkspace/contents.xcworkspacedata
+/*.gcno
+**/xcshareddata/WorkspaceSettings.xcsettings
+Carthage/Build/
