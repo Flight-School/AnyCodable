@@ -5,10 +5,10 @@
    objects = {
       "AnyCodable::AnyCodable" = {
          isa = "PBXNativeTarget";
-         buildConfigurationList = "OBJ_23";
+         buildConfigurationList = "OBJ_25";
          buildPhases = (
-            "OBJ_26",
-            "OBJ_30"
+            "OBJ_28",
+            "OBJ_32"
          );
          dependencies = (
          );
@@ -24,24 +24,24 @@
       };
       "AnyCodable::AnyCodablePackageTests::ProductTarget" = {
          isa = "PBXAggregateTarget";
-         buildConfigurationList = "OBJ_38";
+         buildConfigurationList = "OBJ_40";
          buildPhases = (
          );
          dependencies = (
-            "OBJ_41"
+            "OBJ_43"
          );
          name = "AnyCodablePackageTests";
          productName = "AnyCodablePackageTests";
       };
       "AnyCodable::AnyCodableTests" = {
          isa = "PBXNativeTarget";
-         buildConfigurationList = "OBJ_43";
+         buildConfigurationList = "OBJ_45";
          buildPhases = (
-            "OBJ_46",
-            "OBJ_50"
+            "OBJ_48",
+            "OBJ_52"
          );
          dependencies = (
-            "OBJ_52"
+            "OBJ_54"
          );
          name = "AnyCodableTests";
          productName = "AnyCodableTests";
@@ -55,9 +55,9 @@
       };
       "AnyCodable::SwiftPMPackageDescription" = {
          isa = "PBXNativeTarget";
-         buildConfigurationList = "OBJ_32";
+         buildConfigurationList = "OBJ_34";
          buildPhases = (
-            "OBJ_35"
+            "OBJ_37"
          );
          dependencies = (
          );
@@ -68,6 +68,7 @@
       "OBJ_1" = {
          isa = "PBXProject";
          attributes = {
+            LastSwiftMigration = "9999";
             LastUpgradeCheck = "9999";
          };
          buildConfigurationList = "OBJ_2";
@@ -78,7 +79,7 @@
             "en"
          );
          mainGroup = "OBJ_5";
-         productRefGroup = "OBJ_19";
+         productRefGroup = "OBJ_17";
          projectDirPath = ".";
          targets = (
             "AnyCodable::AnyCodable",
@@ -88,71 +89,55 @@
          );
       };
       "OBJ_10" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_11",
-            "OBJ_12",
-            "OBJ_13"
-         );
-         name = "AnyCodable";
-         path = "Sources/AnyCodable";
-         sourceTree = "SOURCE_ROOT";
-      };
-      "OBJ_11" = {
-         isa = "PBXFileReference";
-         path = "AnyCodable.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_12" = {
          isa = "PBXFileReference";
          path = "AnyDecodable.swift";
          sourceTree = "<group>";
       };
-      "OBJ_13" = {
+      "OBJ_11" = {
          isa = "PBXFileReference";
          path = "AnyEncodable.swift";
          sourceTree = "<group>";
       };
-      "OBJ_14" = {
+      "OBJ_12" = {
          isa = "PBXGroup";
          children = (
-            "OBJ_15"
+            "OBJ_13"
          );
          name = "Tests";
          path = "";
          sourceTree = "SOURCE_ROOT";
       };
-      "OBJ_15" = {
+      "OBJ_13" = {
          isa = "PBXGroup";
          children = (
-            "OBJ_16",
-            "OBJ_17",
-            "OBJ_18"
+            "OBJ_14",
+            "OBJ_15",
+            "OBJ_16"
          );
          name = "AnyCodableTests";
          path = "Tests/AnyCodableTests";
          sourceTree = "SOURCE_ROOT";
       };
-      "OBJ_16" = {
+      "OBJ_14" = {
          isa = "PBXFileReference";
          path = "AnyCodableTests.swift";
          sourceTree = "<group>";
       };
-      "OBJ_17" = {
+      "OBJ_15" = {
          isa = "PBXFileReference";
          path = "AnyDecodableTests.swift";
          sourceTree = "<group>";
       };
-      "OBJ_18" = {
+      "OBJ_16" = {
          isa = "PBXFileReference";
          path = "AnyEncodableTests.swift";
          sourceTree = "<group>";
       };
-      "OBJ_19" = {
+      "OBJ_17" = {
          isa = "PBXGroup";
          children = (
-            "AnyCodable::AnyCodableTests::Product",
-            "AnyCodable::AnyCodable::Product"
+            "AnyCodable::AnyCodable::Product",
+            "AnyCodable::AnyCodableTests::Product"
          );
          name = "Products";
          path = "";
@@ -167,18 +152,37 @@
          defaultConfigurationIsVisible = "0";
          defaultConfigurationName = "Release";
       };
+      "OBJ_20" = {
+         isa = "PBXFileReference";
+         path = "AnyCodable.xcworkspace";
+         sourceTree = "SOURCE_ROOT";
+      };
+      "OBJ_21" = {
+         isa = "PBXFileReference";
+         path = "LICENSE.md";
+         sourceTree = "<group>";
+      };
+      "OBJ_22" = {
+         isa = "PBXFileReference";
+         path = "README.md";
+         sourceTree = "<group>";
+      };
       "OBJ_23" = {
+         isa = "PBXFileReference";
+         path = "AnyCodable.xcconfig";
+         sourceTree = "<group>";
+      };
+      "OBJ_25" = {
          isa = "XCConfigurationList";
          buildConfigurations = (
-            "OBJ_24",
-            "OBJ_25"
+            "OBJ_26",
+            "OBJ_27"
          );
          defaultConfigurationIsVisible = "0";
          defaultConfigurationName = "Release";
       };
-      "OBJ_24" = {
+      "OBJ_26" = {
          isa = "XCBuildConfiguration";
-         baseConfigurationReference = "OBJ_8";
          buildSettings = {
             ENABLE_TESTABILITY = "YES";
             FRAMEWORK_SEARCH_PATHS = (
@@ -189,10 +193,12 @@
                "$(inherited)"
             );
             INFOPLIST_FILE = "AnyCodable.xcodeproj/AnyCodable_Info.plist";
+            IPHONEOS_DEPLOYMENT_TARGET = "8.0";
             LD_RUNPATH_SEARCH_PATHS = (
                "$(inherited)",
                "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx"
             );
+            MACOSX_DEPLOYMENT_TARGET = "10.10";
             OTHER_CFLAGS = (
                "$(inherited)"
             );
@@ -209,14 +215,15 @@
             SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
                "$(inherited)"
             );
-            SWIFT_VERSION = "4.0";
+            SWIFT_VERSION = "5.0";
             TARGET_NAME = "AnyCodable";
+            TVOS_DEPLOYMENT_TARGET = "9.0";
+            WATCHOS_DEPLOYMENT_TARGET = "2.0";
          };
          name = "Debug";
       };
-      "OBJ_25" = {
+      "OBJ_27" = {
          isa = "XCBuildConfiguration";
-         baseConfigurationReference = "OBJ_8";
          buildSettings = {
             ENABLE_TESTABILITY = "YES";
             FRAMEWORK_SEARCH_PATHS = (
@@ -227,10 +234,12 @@
                "$(inherited)"
             );
             INFOPLIST_FILE = "AnyCodable.xcodeproj/AnyCodable_Info.plist";
+            IPHONEOS_DEPLOYMENT_TARGET = "8.0";
             LD_RUNPATH_SEARCH_PATHS = (
                "$(inherited)",
                "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx"
             );
+            MACOSX_DEPLOYMENT_TARGET = "10.10";
             OTHER_CFLAGS = (
                "$(inherited)"
             );
@@ -247,30 +256,24 @@
             SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
                "$(inherited)"
             );
-            SWIFT_VERSION = "4.0";
+            SWIFT_VERSION = "5.0";
             TARGET_NAME = "AnyCodable";
+            TVOS_DEPLOYMENT_TARGET = "9.0";
+            WATCHOS_DEPLOYMENT_TARGET = "2.0";
          };
          name = "Release";
       };
-      "OBJ_26" = {
+      "OBJ_28" = {
          isa = "PBXSourcesBuildPhase";
          files = (
-            "OBJ_27",
-            "OBJ_28",
-            "OBJ_29"
+            "OBJ_29",
+            "OBJ_30",
+            "OBJ_31"
          );
-      };
-      "OBJ_27" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_11";
-      };
-      "OBJ_28" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_12";
       };
       "OBJ_29" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_13";
+         fileRef = "OBJ_9";
       };
       "OBJ_3" = {
          isa = "XCBuildConfiguration";
@@ -283,8 +286,9 @@
             ENABLE_NS_ASSERTIONS = "YES";
             GCC_OPTIMIZATION_LEVEL = "0";
             GCC_PREPROCESSOR_DEFINITIONS = (
-               "DEBUG=1",
-               "$(inherited)"
+               "$(inherited)",
+               "SWIFT_PACKAGE=1",
+               "DEBUG=1"
             );
             MACOSX_DEPLOYMENT_TARGET = "10.10";
             ONLY_ACTIVE_ARCH = "YES";
@@ -303,6 +307,7 @@
                "watchsimulator"
             );
             SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+               "$(inherited)",
                "SWIFT_PACKAGE",
                "DEBUG"
             );
@@ -312,79 +317,72 @@
          name = "Debug";
       };
       "OBJ_30" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_10";
+      };
+      "OBJ_31" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_11";
+      };
+      "OBJ_32" = {
          isa = "PBXFrameworksBuildPhase";
          files = (
          );
       };
-      "OBJ_32" = {
+      "OBJ_34" = {
          isa = "XCConfigurationList";
          buildConfigurations = (
-            "OBJ_33",
-            "OBJ_34"
+            "OBJ_35",
+            "OBJ_36"
          );
          defaultConfigurationIsVisible = "0";
          defaultConfigurationName = "Release";
       };
-      "OBJ_33" = {
+      "OBJ_35" = {
          isa = "XCBuildConfiguration";
          buildSettings = {
             LD = "/usr/bin/true";
             OTHER_SWIFT_FLAGS = (
                "-swift-version",
-               "4",
+               "5",
                "-I",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/pm/4",
+               "$(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2",
                "-target",
                "x86_64-apple-macosx10.10",
                "-sdk",
                "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk"
             );
-            SWIFT_VERSION = "4.0";
+            SWIFT_VERSION = "5.0";
          };
          name = "Debug";
       };
-      "OBJ_34" = {
+      "OBJ_36" = {
          isa = "XCBuildConfiguration";
          buildSettings = {
             LD = "/usr/bin/true";
             OTHER_SWIFT_FLAGS = (
                "-swift-version",
-               "4",
+               "5",
                "-I",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/pm/4",
+               "$(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2",
                "-target",
                "x86_64-apple-macosx10.10",
                "-sdk",
                "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk"
             );
-            SWIFT_VERSION = "4.0";
+            SWIFT_VERSION = "5.0";
          };
          name = "Release";
       };
-      "OBJ_35" = {
+      "OBJ_37" = {
          isa = "PBXSourcesBuildPhase";
          files = (
-            "OBJ_36"
+            "OBJ_38"
          );
-      };
-      "OBJ_36" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_6";
       };
       "OBJ_38" = {
-         isa = "XCConfigurationList";
-         buildConfigurations = (
-            "OBJ_39",
-            "OBJ_40"
-         );
-         defaultConfigurationIsVisible = "0";
-         defaultConfigurationName = "Release";
-      };
-      "OBJ_39" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-         };
-         name = "Debug";
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_6";
       };
       "OBJ_4" = {
          isa = "XCBuildConfiguration";
@@ -395,6 +393,10 @@
             DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
             DYLIB_INSTALL_NAME_BASE = "@rpath";
             GCC_OPTIMIZATION_LEVEL = "s";
+            GCC_PREPROCESSOR_DEFINITIONS = (
+               "$(inherited)",
+               "SWIFT_PACKAGE=1"
+            );
             MACOSX_DEPLOYMENT_TARGET = "10.10";
             OTHER_SWIFT_FLAGS = (
                "-DXcode"
@@ -411,6 +413,7 @@
                "watchsimulator"
             );
             SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+               "$(inherited)",
                "SWIFT_PACKAGE"
             );
             SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -419,63 +422,41 @@
          name = "Release";
       };
       "OBJ_40" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-         };
-         name = "Release";
-      };
-      "OBJ_41" = {
-         isa = "PBXTargetDependency";
-         target = "AnyCodable::AnyCodableTests";
-      };
-      "OBJ_43" = {
          isa = "XCConfigurationList";
          buildConfigurations = (
-            "OBJ_44",
-            "OBJ_45"
+            "OBJ_41",
+            "OBJ_42"
          );
          defaultConfigurationIsVisible = "0";
          defaultConfigurationName = "Release";
       };
-      "OBJ_44" = {
+      "OBJ_41" = {
          isa = "XCBuildConfiguration";
-         baseConfigurationReference = "OBJ_8";
          buildSettings = {
-            CLANG_ENABLE_MODULES = "YES";
-            EMBEDDED_CONTENT_CONTAINS_SWIFT = "YES";
-            FRAMEWORK_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
-            );
-            HEADER_SEARCH_PATHS = (
-               "$(inherited)"
-            );
-            INFOPLIST_FILE = "AnyCodable.xcodeproj/AnyCodableTests_Info.plist";
-            LD_RUNPATH_SEARCH_PATHS = (
-               "$(inherited)",
-               "@loader_path/../Frameworks",
-               "@loader_path/Frameworks"
-            );
-            OTHER_CFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_LDFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_SWIFT_FLAGS = (
-               "$(inherited)"
-            );
-            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-               "$(inherited)"
-            );
-            SWIFT_VERSION = "4.0";
-            TARGET_NAME = "AnyCodableTests";
          };
          name = "Debug";
       };
-      "OBJ_45" = {
+      "OBJ_42" = {
          isa = "XCBuildConfiguration";
-         baseConfigurationReference = "OBJ_8";
+         buildSettings = {
+         };
+         name = "Release";
+      };
+      "OBJ_43" = {
+         isa = "PBXTargetDependency";
+         target = "AnyCodable::AnyCodableTests";
+      };
+      "OBJ_45" = {
+         isa = "XCConfigurationList";
+         buildConfigurations = (
+            "OBJ_46",
+            "OBJ_47"
+         );
+         defaultConfigurationIsVisible = "0";
+         defaultConfigurationName = "Release";
+      };
+      "OBJ_46" = {
+         isa = "XCBuildConfiguration";
          buildSettings = {
             CLANG_ENABLE_MODULES = "YES";
             EMBEDDED_CONTENT_CONTAINS_SWIFT = "YES";
@@ -487,11 +468,13 @@
                "$(inherited)"
             );
             INFOPLIST_FILE = "AnyCodable.xcodeproj/AnyCodableTests_Info.plist";
+            IPHONEOS_DEPLOYMENT_TARGET = "8.0";
             LD_RUNPATH_SEARCH_PATHS = (
                "$(inherited)",
                "@loader_path/../Frameworks",
                "@loader_path/Frameworks"
             );
+            MACOSX_DEPLOYMENT_TARGET = "10.10";
             OTHER_CFLAGS = (
                "$(inherited)"
             );
@@ -504,54 +487,98 @@
             SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
                "$(inherited)"
             );
-            SWIFT_VERSION = "4.0";
+            SWIFT_VERSION = "5.0";
             TARGET_NAME = "AnyCodableTests";
+            TVOS_DEPLOYMENT_TARGET = "9.0";
+            WATCHOS_DEPLOYMENT_TARGET = "2.0";
+         };
+         name = "Debug";
+      };
+      "OBJ_47" = {
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+            CLANG_ENABLE_MODULES = "YES";
+            EMBEDDED_CONTENT_CONTAINS_SWIFT = "YES";
+            FRAMEWORK_SEARCH_PATHS = (
+               "$(inherited)",
+               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
+            );
+            HEADER_SEARCH_PATHS = (
+               "$(inherited)"
+            );
+            INFOPLIST_FILE = "AnyCodable.xcodeproj/AnyCodableTests_Info.plist";
+            IPHONEOS_DEPLOYMENT_TARGET = "8.0";
+            LD_RUNPATH_SEARCH_PATHS = (
+               "$(inherited)",
+               "@loader_path/../Frameworks",
+               "@loader_path/Frameworks"
+            );
+            MACOSX_DEPLOYMENT_TARGET = "10.10";
+            OTHER_CFLAGS = (
+               "$(inherited)"
+            );
+            OTHER_LDFLAGS = (
+               "$(inherited)"
+            );
+            OTHER_SWIFT_FLAGS = (
+               "$(inherited)"
+            );
+            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+               "$(inherited)"
+            );
+            SWIFT_VERSION = "5.0";
+            TARGET_NAME = "AnyCodableTests";
+            TVOS_DEPLOYMENT_TARGET = "9.0";
+            WATCHOS_DEPLOYMENT_TARGET = "2.0";
          };
          name = "Release";
       };
-      "OBJ_46" = {
+      "OBJ_48" = {
          isa = "PBXSourcesBuildPhase";
          files = (
-            "OBJ_47",
-            "OBJ_48",
-            "OBJ_49"
+            "OBJ_49",
+            "OBJ_50",
+            "OBJ_51"
          );
-      };
-      "OBJ_47" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_16";
-      };
-      "OBJ_48" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_17";
       };
       "OBJ_49" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_18";
+         fileRef = "OBJ_14";
       };
       "OBJ_5" = {
          isa = "PBXGroup";
          children = (
             "OBJ_6",
             "OBJ_7",
-            "OBJ_9",
-            "OBJ_14",
-            "OBJ_19"
+            "OBJ_12",
+            "OBJ_17",
+            "OBJ_20",
+            "OBJ_21",
+            "OBJ_22",
+            "OBJ_23"
          );
          path = "";
          sourceTree = "<group>";
       };
       "OBJ_50" = {
-         isa = "PBXFrameworksBuildPhase";
-         files = (
-            "OBJ_51"
-         );
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_15";
       };
       "OBJ_51" = {
          isa = "PBXBuildFile";
-         fileRef = "AnyCodable::AnyCodable::Product";
+         fileRef = "OBJ_16";
       };
       "OBJ_52" = {
+         isa = "PBXFrameworksBuildPhase";
+         files = (
+            "OBJ_53"
+         );
+      };
+      "OBJ_53" = {
+         isa = "PBXBuildFile";
+         fileRef = "AnyCodable::AnyCodable::Product";
+      };
+      "OBJ_54" = {
          isa = "PBXTargetDependency";
          target = "AnyCodable::AnyCodable";
       };
@@ -566,23 +593,25 @@
          children = (
             "OBJ_8"
          );
-         name = "Configs";
-         path = "";
-         sourceTree = "<group>";
-      };
-      "OBJ_8" = {
-         isa = "PBXFileReference";
-         path = "AnyCodable.xcconfig";
-         sourceTree = "<group>";
-      };
-      "OBJ_9" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_10"
-         );
          name = "Sources";
          path = "";
          sourceTree = "SOURCE_ROOT";
+      };
+      "OBJ_8" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_9",
+            "OBJ_10",
+            "OBJ_11"
+         );
+         name = "AnyCodable";
+         path = "Sources/AnyCodable";
+         sourceTree = "SOURCE_ROOT";
+      };
+      "OBJ_9" = {
+         isa = "PBXFileReference";
+         path = "AnyCodable.swift";
+         sourceTree = "<group>";
       };
    };
    rootObject = "OBJ_1";
