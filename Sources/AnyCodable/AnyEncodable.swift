@@ -119,6 +119,8 @@ extension _AnyEncodable {
             try container.encode(nsnumber.floatValue)
         case .doubleType, .float64Type, .cgFloatType:
             try container.encode(nsnumber.doubleValue)
+        @unknown default:
+            fatalError()
         }
     }
 }
