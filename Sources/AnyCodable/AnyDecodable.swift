@@ -2,14 +2,14 @@ import Foundation
 
 /**
  A type-erased `Decodable` value.
- 
+
  The `AnyDecodable` type forwards decoding responsibilities
  to an underlying value, hiding its specific underlying type.
- 
+
  You can decode mixed-type values in dictionaries
  and other collections that require `Decodable` conformance
  by declaring their contained type to be `AnyDecodable`:
- 
+
      let json = """
      {
          "boolean": true,
@@ -24,13 +24,13 @@ import Foundation
          }
      }
      """.data(using: .utf8)!
- 
+
      let decoder = JSONDecoder()
      let dictionary = try! decoder.decode([String: AnyCodable].self, from: json)
  */
 public struct AnyDecodable: Decodable {
     public let value: Any
-    
+
     public init<T>(_ value: T?) {
         self.value = value ?? ()
     }
@@ -46,7 +46,7 @@ extension AnyDecodable: _AnyDecodable {}
 extension _AnyDecodable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        
+
         if container.decodeNil() {
             self.init(NSNull())
         } else if let bool = try? container.decode(Bool.self) {
@@ -70,7 +70,7 @@ extension _AnyDecodable {
 }
 
 extension AnyDecodable: Equatable {
-    public static func ==(lhs: AnyDecodable, rhs: AnyDecodable) -> Bool {
+    public static func == (lhs: AnyDecodable, rhs: AnyDecodable) -> Bool {
         switch (lhs.value, rhs.value) {
         case is (NSNull, NSNull), is (Void, Void):
             return true
@@ -102,9 +102,9 @@ extension AnyDecodable: Equatable {
             return lhs == rhs
         case let (lhs as String, rhs as String):
             return lhs == rhs
-        case (let lhs as [String: AnyDecodable], let rhs as [String: AnyDecodable]):
+        case let (lhs as [String: AnyDecodable], rhs as [String: AnyDecodable]):
             return lhs == rhs
-        case (let lhs as [AnyDecodable], let rhs as [AnyDecodable]):
+        case let (lhs as [AnyDecodable], rhs as [AnyDecodable]):
             return lhs == rhs
         default:
             return false
@@ -131,7 +131,7 @@ extension AnyDecodable: CustomDebugStringConvertible {
         case let value as CustomDebugStringConvertible:
             return "AnyDecodable(\(value.debugDescription))"
         default:
-            return "AnyDecodable(\(self.description))"
+            return "AnyDecodable(\(description))"
         }
     }
 }

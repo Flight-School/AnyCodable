@@ -2,20 +2,20 @@ import Foundation
 
 /**
  A type-erased `Codable` value.
- 
+
  The `AnyCodable` type forwards encoding and decoding responsibilities
  to an underlying value, hiding its specific underlying type.
- 
+
  You can encode or decode mixed-type values in dictionaries
  and other collections that require `Encodable` or `Decodable` conformance
  by declaring their contained type to be `AnyCodable`.
- 
+
  - SeeAlso: `AnyEncodable`
  - SeeAlso: `AnyDecodable`
  */
 public struct AnyCodable: Codable {
     public let value: Any
-    
+
     public init<T>(_ value: T?) {
         self.value = value ?? ()
     }
@@ -24,7 +24,7 @@ public struct AnyCodable: Codable {
 extension AnyCodable: _AnyEncodable, _AnyDecodable {}
 
 extension AnyCodable: Equatable {
-    public static func ==(lhs: AnyCodable, rhs: AnyCodable) -> Bool {
+    public static func == (lhs: AnyCodable, rhs: AnyCodable) -> Bool {
         switch (lhs.value, rhs.value) {
         case is (Void, Void):
             return true
@@ -56,9 +56,9 @@ extension AnyCodable: Equatable {
             return lhs == rhs
         case let (lhs as String, rhs as String):
             return lhs == rhs
-        case (let lhs as [String: AnyCodable], let rhs as [String: AnyCodable]):
+        case let (lhs as [String: AnyCodable], rhs as [String: AnyCodable]):
             return lhs == rhs
-        case (let lhs as [AnyCodable], let rhs as [AnyCodable]):
+        case let (lhs as [AnyCodable], rhs as [AnyCodable]):
             return lhs == rhs
         default:
             return false
@@ -85,9 +85,15 @@ extension AnyCodable: CustomDebugStringConvertible {
         case let value as CustomDebugStringConvertible:
             return "AnyCodable(\(value.debugDescription))"
         default:
-            return "AnyCodable(\(self.description))"
+            return "AnyCodable(\(description))"
         }
     }
 }
 
-extension AnyCodable: ExpressibleByNilLiteral, ExpressibleByBooleanLiteral, ExpressibleByIntegerLiteral, ExpressibleByFloatLiteral, ExpressibleByStringLiteral, ExpressibleByArrayLiteral, ExpressibleByDictionaryLiteral {}
+extension AnyCodable: ExpressibleByNilLiteral {}
+extension AnyCodable: ExpressibleByBooleanLiteral {}
+extension AnyCodable: ExpressibleByIntegerLiteral {}
+extension AnyCodable: ExpressibleByFloatLiteral {}
+extension AnyCodable: ExpressibleByStringLiteral {}
+extension AnyCodable: ExpressibleByArrayLiteral {}
+extension AnyCodable: ExpressibleByDictionaryLiteral {}
