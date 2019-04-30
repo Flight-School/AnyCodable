@@ -1,3 +1,4 @@
+language: swift
 matrix:
   include:
     - os: osx
