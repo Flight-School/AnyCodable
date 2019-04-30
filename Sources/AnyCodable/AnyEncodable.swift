@@ -2,14 +2,14 @@ import Foundation
 
 /**
  A type-erased `Encodable` value.
- 
+
  The `AnyEncodable` type forwards encoding responsibilities
  to an underlying value, hiding its specific underlying type.
- 
+
  You can encode mixed-type values in dictionaries
  and other collections that require `Encodable` conformance
  by declaring their contained type to be `AnyEncodable`:
- 
+
      let dictionary: [String: AnyEncodable] = [
          "boolean": true,
          "integer": 1,
@@ -22,13 +22,13 @@ import Foundation
              "c": "charlie"
          ]
      ]
- 
+
      let encoder = JSONEncoder()
      let json = try! encoder.encode(dictionary)
  */
 public struct AnyEncodable: Encodable {
     public let value: Any
-    
+
     public init<T>(_ value: T?) {
         self.value = value ?? ()
     }
@@ -39,7 +39,6 @@ protocol _AnyEncodable {
     init<T>(_ value: T?)
 }
 
-
 extension AnyEncodable: _AnyEncodable {}
 
 // MARK: - Encodable
@@ -47,8 +46,8 @@ extension AnyEncodable: _AnyEncodable {}
 extension _AnyEncodable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
-        
-        switch self.value {
+
+        switch value {
         case let number as NSNumber:
             try encode(nsnumber: number, into: &container)
         case is NSNull, is Void:
@@ -91,7 +90,7 @@ extension _AnyEncodable {
             try container.encode(dictionary.mapValues { AnyCodable($0) })
         default:
             let context = EncodingError.Context(codingPath: container.codingPath, debugDescription: "AnyCodable value cannot be encoded")
-            throw EncodingError.invalidValue(self.value, context)
+            throw EncodingError.invalidValue(value, context)
         }
     }
 
@@ -128,7 +127,7 @@ extension _AnyEncodable {
 }
 
 extension AnyEncodable: Equatable {
-    public static func ==(lhs: AnyEncodable, rhs: AnyEncodable) -> Bool {
+    public static func == (lhs: AnyEncodable, rhs: AnyEncodable) -> Bool {
         switch (lhs.value, rhs.value) {
         case is (Void, Void):
             return true
@@ -160,9 +159,9 @@ extension AnyEncodable: Equatable {
             return lhs == rhs
         case let (lhs as String, rhs as String):
             return lhs == rhs
-        case (let lhs as [String: AnyEncodable], let rhs as [String: AnyEncodable]):
+        case let (lhs as [String: AnyEncodable], rhs as [String: AnyEncodable]):
             return lhs == rhs
-        case (let lhs as [AnyEncodable], let rhs as [AnyEncodable]):
+        case let (lhs as [AnyEncodable], rhs as [AnyEncodable]):
             return lhs == rhs
         default:
             return false
@@ -189,15 +188,21 @@ extension AnyEncodable: CustomDebugStringConvertible {
         case let value as CustomDebugStringConvertible:
             return "AnyEncodable(\(value.debugDescription))"
         default:
-            return "AnyEncodable(\(self.description))"
+            return "AnyEncodable(\(description))"
         }
     }
 }
 
-extension AnyEncodable: ExpressibleByNilLiteral, ExpressibleByBooleanLiteral, ExpressibleByIntegerLiteral, ExpressibleByFloatLiteral, ExpressibleByStringLiteral, ExpressibleByArrayLiteral, ExpressibleByDictionaryLiteral {}
+extension AnyEncodable: ExpressibleByNilLiteral {}
+extension AnyEncodable: ExpressibleByBooleanLiteral {}
+extension AnyEncodable: ExpressibleByIntegerLiteral {}
+extension AnyEncodable: ExpressibleByFloatLiteral {}
+extension AnyEncodable: ExpressibleByStringLiteral {}
+extension AnyEncodable: ExpressibleByArrayLiteral {}
+extension AnyEncodable: ExpressibleByDictionaryLiteral {}
 
 extension _AnyEncodable {
-    public init(nilLiteral: ()) {
+    public init(nilLiteral _: ()) {
         self.init(nil as Any?)
     }
 
@@ -216,7 +221,7 @@ extension _AnyEncodable {
     public init(extendedGraphemeClusterLiteral value: String) {
         self.init(value)
     }
-    
+
     public init(stringLiteral value: String) {
         self.init(value)
     }
@@ -226,6 +231,6 @@ extension _AnyEncodable {
     }
 
     public init(dictionaryLiteral elements: (AnyHashable, Any)...) {
-        self.init(Dictionary<AnyHashable, Any>(elements, uniquingKeysWith: { (first, _) in first }))
+        self.init([AnyHashable: Any](elements, uniquingKeysWith: { first, _ in first }))
     }
 }
