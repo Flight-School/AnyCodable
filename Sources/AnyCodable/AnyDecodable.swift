@@ -48,7 +48,7 @@ extension _AnyDecodable {
         let container = try decoder.singleValueContainer()
         
         if container.decodeNil() {
-            self.init(())
+            self.init(NSNull())
         } else if let bool = try? container.decode(Bool.self) {
             self.init(bool)
         } else if let int = try? container.decode(Int.self) {
@@ -72,7 +72,7 @@ extension _AnyDecodable {
 extension AnyDecodable: Equatable {
     public static func ==(lhs: AnyDecodable, rhs: AnyDecodable) -> Bool {
         switch (lhs.value, rhs.value) {
-        case is (Void, Void):
+        case is (NSNull, NSNull), is (Void, Void):
             return true
         case let (lhs as Bool, rhs as Bool):
             return lhs == rhs

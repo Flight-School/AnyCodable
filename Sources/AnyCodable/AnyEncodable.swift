@@ -51,7 +51,7 @@ extension _AnyEncodable {
         switch self.value {
         case let number as NSNumber:
             try encode(nsnumber: number, into: &container)
-        case is Void:
+        case is NSNull, is Void:
             try container.encodeNil()
         case let bool as Bool:
             try container.encode(bool)
