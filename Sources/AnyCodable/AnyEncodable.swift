@@ -48,8 +48,10 @@ extension _AnyEncodable {
         var container = encoder.singleValueContainer()
 
         switch value {
+            #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
         case let number as NSNumber:
             try encode(nsnumber: number, into: &container)
+            #endif
         case is NSNull, is Void:
             try container.encodeNil()
         case let bool as Bool:
@@ -94,6 +96,7 @@ extension _AnyEncodable {
         }
     }
 
+    #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
     private func encode(nsnumber: NSNumber, into container: inout SingleValueEncodingContainer) throws {
         switch CFNumberGetType(nsnumber) {
         case .charType:
@@ -124,6 +127,7 @@ extension _AnyEncodable {
         #endif
         }
     }
+    #endif
 }
 
 extension AnyEncodable: Equatable {
