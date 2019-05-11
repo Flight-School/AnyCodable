@@ -12,7 +12,62 @@ Type-erased wrappers for `Encodable`, `Decodable`, and `Codable` values.
 This functionality is discussed in Chapter 3 of
 [Flight School Guide to Swift Codable](https://flight.school/books/codable).
 
-## AnyEncodable
+## Installation
+
+### Swift Package Manager
+
+Add the AnyCodable package to your target dependencies in `Package.swift`:
+
+```swift
+import PackageDescription
+
+let package = Package(
+  name: "YourProject",
+  dependencies: [
+    .package(
+        url: "https://github.com/Flight-School/AnyCodable",
+        from: "0.2.1"
+    ),
+  ]
+)
+```
+
+Then run the `swift build` command to build your project.
+
+### CocoaPods
+
+You can install `AnyCodable` via CocoaPods,
+by adding the following line to your `Podfile`:
+
+```ruby
+pod 'AnyCodable-FlightSchool', '~> 0.2.1'
+```
+
+Run the `pod install` command to download the library
+and integrate it into your Xcode project.
+
+> **Note**
+> The module name for this library is "AnyCodable" ---
+> that is, to use it, you add `import AnyCodable` to the top of your Swift code
+> just as you would by any other installation method.
+> The pod is called "AnyCodable-FlightSchool"
+> because there's an existing pod with the name "AnyCodable".
+
+### Carthage
+
+To use `AnyCodable` in your Xcode project using Carthage,
+specify it in `Cartfile`:
+
+```
+github "Flight-School/AnyCodable" ~> 0.2.1
+```
+
+Then run the `carthage update` command to build the framework,
+and drag the built AnyCodable.framework into your Xcode project.
+
+## Usage
+
+### AnyEncodable
 
 ```swift
 import AnyCodable
@@ -34,7 +89,7 @@ let encoder = JSONEncoder()
 let json = try! encoder.encode(dictionary)
 ```
 
-## AnyDecodable
+### AnyDecodable
 
 ```swift
 let json = """
@@ -56,7 +111,7 @@ let decoder = JSONDecoder()
 let dictionary = try! decoder.decode([String: AnyDecodable].self, from: json)
 ```
 
-## AnyCodable
+### AnyCodable
 
 `AnyCodable` can be used to wrap values for encoding and decoding.
 
