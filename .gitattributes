@@ -1,0 +1,2 @@
+Brewfile linguist-detectable=false
+*.podspec linguist-detectable=false
