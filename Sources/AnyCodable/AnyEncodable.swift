@@ -87,9 +87,9 @@ extension _AnyEncodable {
         case let url as URL:
             try container.encode(url)
         case let array as [Any?]:
-            try container.encode(array.map { AnyCodable($0) })
+            try container.encode(array.map { AnyEncodable($0) })
         case let dictionary as [String: Any?]:
-            try container.encode(dictionary.mapValues { AnyCodable($0) })
+            try container.encode(dictionary.mapValues { AnyEncodable($0) })
         default:
             let context = EncodingError.Context(codingPath: container.codingPath, debugDescription: "AnyCodable value cannot be encoded")
             throw EncodingError.invalidValue(value, context)

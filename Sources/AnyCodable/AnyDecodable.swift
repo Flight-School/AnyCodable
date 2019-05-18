@@ -26,7 +26,7 @@ import Foundation
      """.data(using: .utf8)!
 
      let decoder = JSONDecoder()
-     let dictionary = try! decoder.decode([String: AnyCodable].self, from: json)
+     let dictionary = try! decoder.decode([String: AnyDecodable].self, from: json)
  */
 public struct AnyDecodable: Decodable {
     public let value: Any
@@ -59,9 +59,9 @@ extension _AnyDecodable {
             self.init(double)
         } else if let string = try? container.decode(String.self) {
             self.init(string)
-        } else if let array = try? container.decode([AnyCodable].self) {
+        } else if let array = try? container.decode([AnyDecodable].self) {
             self.init(array.map { $0.value })
-        } else if let dictionary = try? container.decode([String: AnyCodable].self) {
+        } else if let dictionary = try? container.decode([String: AnyDecodable].self) {
             self.init(dictionary.mapValues { $0.value })
         } else {
             throw DecodingError.dataCorruptedError(in: container, debugDescription: "AnyCodable value cannot be decoded")
