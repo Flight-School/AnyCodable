@@ -34,10 +34,18 @@ public struct AnyEncodable: Encodable {
     }
 }
 
+#if swift(>=4.2)
+@usableFromInline
 protocol _AnyEncodable {
     var value: Any { get }
     init<T>(_ value: T?)
 }
+#else
+protocol _AnyEncodable {
+    var value: Any { get }
+    init<T>(_ value: T?)
+}
+#endif
 
 extension AnyEncodable: _AnyEncodable {}
 
