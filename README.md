@@ -26,7 +26,7 @@ let package = Package(
   dependencies: [
     .package(
         url: "https://github.com/Flight-School/AnyCodable",
-        from: "0.2.2"
+        from: "0.2.3"
     ),
   ]
 )
@@ -40,7 +40,7 @@ You can install `AnyCodable` via CocoaPods,
 by adding the following line to your `Podfile`:
 
 ```ruby
-pod 'AnyCodable-FlightSchool', '~> 0.2.2'
+pod 'AnyCodable-FlightSchool', '~> 0.2.3'
 ```
 
 Run the `pod install` command to download the library
@@ -59,7 +59,7 @@ To use `AnyCodable` in your Xcode project using Carthage,
 specify it in `Cartfile`:
 
 ```
-github "Flight-School/AnyCodable" ~> 0.2.2
+github "Flight-School/AnyCodable" ~> 0.2.3
 ```
 
 Then run the `carthage update` command to build the framework,
