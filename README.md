@@ -36,7 +36,7 @@ Then run the `swift build` command to build your project.
 
 ### CocoaPods
 
-You can install `AnyCodable` via CocoaPods,
+You can install `AnyCodable` via CocoaPods
 by adding the following line to your `Podfile`:
 
 ```ruby
