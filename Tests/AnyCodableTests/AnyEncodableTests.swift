@@ -49,7 +49,7 @@ class AnyEncodableTests: XCTestCase {
 
         let encoder = JSONEncoder()
 
-        let json = try encoder.encode(AnyCodable(dictionary))
+        let json = try encoder.encode(AnyEncodable(dictionary))
         let encodedJSONObject = try JSONSerialization.jsonObject(with: json, options: []) as! NSDictionary
 
         let expected = """
