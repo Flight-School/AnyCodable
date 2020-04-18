@@ -1,4 +1,6 @@
+#if canImport(Foundation)
 import Foundation
+#endif
 
 /**
  A type-erased `Decodable` value.
@@ -56,7 +58,11 @@ extension _AnyDecodable {
         let container = try decoder.singleValueContainer()
 
         if container.decodeNil() {
-            self.init(NSNull())
+            #if canImport(Foundation)
+                self.init(NSNull())
+            #else
+                self.init(Optional<Self>.none)
+            #endif
         } else if let bool = try? container.decode(Bool.self) {
             self.init(bool)
         } else if let int = try? container.decode(Int.self) {
@@ -80,8 +86,10 @@ extension _AnyDecodable {
 extension AnyDecodable: Equatable {
     public static func == (lhs: AnyDecodable, rhs: AnyDecodable) -> Bool {
         switch (lhs.value, rhs.value) {
+#if canImport(Foundation)
         case is (NSNull, NSNull), is (Void, Void):
             return true
+#endif
         case let (lhs as Bool, rhs as Bool):
             return lhs == rhs
         case let (lhs as Int, rhs as Int):
