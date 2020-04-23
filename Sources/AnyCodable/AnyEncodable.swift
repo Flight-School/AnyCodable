@@ -1,4 +1,6 @@
+#if canImport(Foundation)
 import Foundation
+#endif
 
 /**
  A type-erased `Encodable` value.
@@ -56,11 +58,15 @@ extension _AnyEncodable {
         var container = encoder.singleValueContainer()
 
         switch value {
-            #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
+#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
         case let number as NSNumber:
             try encode(nsnumber: number, into: &container)
-            #endif
-        case is NSNull, is Void:
+#endif
+#if canImport(Foundation)
+        case is NSNull:
+            try container.encodeNil()
+#endif
+        case is Void:
             try container.encodeNil()
         case let bool as Bool:
             try container.encode(bool)
@@ -90,10 +96,12 @@ extension _AnyEncodable {
             try container.encode(double)
         case let string as String:
             try container.encode(string)
+#if canImport(Foundation)
         case let date as Date:
             try container.encode(date)
         case let url as URL:
             try container.encode(url)
+#endif
         case let array as [Any?]:
             try container.encode(array.map { AnyEncodable($0) })
         case let dictionary as [String: Any?]:
