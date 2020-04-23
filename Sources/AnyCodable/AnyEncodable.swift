@@ -63,12 +63,11 @@ extension _AnyEncodable {
             try encode(nsnumber: number, into: &container)
 #endif
 #if canImport(Foundation)
-        case is NSNull, is Void:
-            try container.encodeNil()
-#else
-        case is Void:
+        case is NSNull:
             try container.encodeNil()
 #endif
+        case is Void:
+            try container.encodeNil()
         case let bool as Bool:
             try container.encode(bool)
         case let int as Int:
