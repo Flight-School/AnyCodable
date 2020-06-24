@@ -11,7 +11,7 @@
  - SeeAlso: `AnyEncodable`
  - SeeAlso: `AnyDecodable`
  */
-public struct AnyCodable: Codable {
+@frozen public struct AnyCodable: Codable {
     public let value: Any
 
     public init<T>(_ value: T?) {
