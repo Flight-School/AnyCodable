@@ -11,7 +11,7 @@
  - SeeAlso: `AnyEncodable`
  - SeeAlso: `AnyDecodable`
  */
-#if swift(>=5.0)
+#if swift(>=5.1)
 @frozen public struct AnyCodable: Codable {
     public let value: Any
 

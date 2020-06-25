@@ -28,7 +28,7 @@ import Foundation
      let encoder = JSONEncoder()
      let json = try! encoder.encode(dictionary)
  */
-#if swift(>=5.0)
+#if swift(>=5.1)
 @frozen public struct AnyEncodable: Encodable {
     public let value: Any
 

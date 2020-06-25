@@ -30,7 +30,7 @@ import Foundation
      let decoder = JSONDecoder()
      let dictionary = try! decoder.decode([String: AnyDecodable].self, from: json)
  */
-#if swift(>=5.0)
+#if swift(>=5.1)
 @frozen public struct AnyDecodable: Decodable {
     public let value: Any
 
