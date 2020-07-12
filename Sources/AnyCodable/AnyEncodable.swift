@@ -218,6 +218,7 @@ extension AnyEncodable: ExpressibleByBooleanLiteral {}
 extension AnyEncodable: ExpressibleByIntegerLiteral {}
 extension AnyEncodable: ExpressibleByFloatLiteral {}
 extension AnyEncodable: ExpressibleByStringLiteral {}
+extension AnyEncodable: ExpressibleByStringInterpolation {}
 extension AnyEncodable: ExpressibleByArrayLiteral {}
 extension AnyEncodable: ExpressibleByDictionaryLiteral {}
 

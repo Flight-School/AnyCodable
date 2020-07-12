@@ -8,6 +8,7 @@ class AnyEncodableTests: XCTestCase {
             "integer": 1,
             "double": 3.14159265358979323846,
             "string": "string",
+            "stringInterpolation": "\(true) \(1) \(3.14) \("string")",
             "array": [1, 2, 3],
             "nested": [
                 "a": "alpha",
@@ -27,6 +28,7 @@ class AnyEncodableTests: XCTestCase {
             "integer": 1,
             "double": 3.14159265358979323846,
             "string": "string",
+            "stringInterpolation": "true 1 3.14 string",
             "array": [1, 2, 3],
             "nested": {
                 "a": "alpha",
