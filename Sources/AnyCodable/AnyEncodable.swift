@@ -218,7 +218,9 @@ extension AnyEncodable: ExpressibleByBooleanLiteral {}
 extension AnyEncodable: ExpressibleByIntegerLiteral {}
 extension AnyEncodable: ExpressibleByFloatLiteral {}
 extension AnyEncodable: ExpressibleByStringLiteral {}
+#if swift(>=5.0)
 extension AnyEncodable: ExpressibleByStringInterpolation {}
+#endif
 extension AnyEncodable: ExpressibleByArrayLiteral {}
 extension AnyEncodable: ExpressibleByDictionaryLiteral {}
 
