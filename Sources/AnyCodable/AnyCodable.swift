@@ -11,6 +11,15 @@
  - SeeAlso: `AnyEncodable`
  - SeeAlso: `AnyDecodable`
  */
+#if swift(>=5.1)
+@frozen public struct AnyCodable: Codable {
+    public let value: Any
+
+    public init<T>(_ value: T?) {
+        self.value = value ?? ()
+    }
+}
+#else
 public struct AnyCodable: Codable {
     public let value: Any
 
@@ -18,6 +27,7 @@ public struct AnyCodable: Codable {
         self.value = value ?? ()
     }
 }
+#endif
 
 extension AnyCodable: _AnyEncodable, _AnyDecodable {}
 

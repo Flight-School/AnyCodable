@@ -28,6 +28,15 @@ import Foundation
      let encoder = JSONEncoder()
      let json = try! encoder.encode(dictionary)
  */
+#if swift(>=5.1)
+@frozen public struct AnyEncodable: Encodable {
+    public let value: Any
+
+    public init<T>(_ value: T?) {
+        self.value = value ?? ()
+    }
+}
+#else
 public struct AnyEncodable: Encodable {
     public let value: Any
 
@@ -35,6 +44,7 @@ public struct AnyEncodable: Encodable {
         self.value = value ?? ()
     }
 }
+#endif
 
 #if swift(>=4.2)
 @usableFromInline
