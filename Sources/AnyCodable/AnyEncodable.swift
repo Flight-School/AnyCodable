@@ -148,8 +148,9 @@ extension _AnyEncodable {
         case .doubleType, .float64Type, .cgFloatType:
             try container.encode(nsnumber.doubleValue)
         #if swift(>=5.0)
-            @unknown default:
-                fatalError()
+        @unknown default:
+            let context = EncodingError.Context(codingPath: container.codingPath, debugDescription: "NSNumber cannot be encoded because its type is not handled")
+            throw EncodingError.invalidValue(nsnumber, context)
         #endif
         }
     }
