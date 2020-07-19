@@ -15,7 +15,7 @@ import Foundation
      let dictionary: [String: AnyEncodable] = [
          "boolean": true,
          "integer": 1,
-         "double": 3.14159265358979323846,
+         "double": 3.141592653589793,
          "string": "string",
          "array": [1, 2, 3],
          "nested": [
@@ -218,6 +218,9 @@ extension AnyEncodable: ExpressibleByBooleanLiteral {}
 extension AnyEncodable: ExpressibleByIntegerLiteral {}
 extension AnyEncodable: ExpressibleByFloatLiteral {}
 extension AnyEncodable: ExpressibleByStringLiteral {}
+#if swift(>=5.0)
+extension AnyEncodable: ExpressibleByStringInterpolation {}
+#endif
 extension AnyEncodable: ExpressibleByArrayLiteral {}
 extension AnyEncodable: ExpressibleByDictionaryLiteral {}
 

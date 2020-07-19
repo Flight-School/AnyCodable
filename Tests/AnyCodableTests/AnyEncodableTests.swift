@@ -6,7 +6,7 @@ class AnyEncodableTests: XCTestCase {
         let dictionary: [String: AnyEncodable] = [
             "boolean": true,
             "integer": 1,
-            "double": 3.14159265358979323846,
+            "double": 3.141592653589793,
             "string": "string",
             "array": [1, 2, 3],
             "nested": [
@@ -25,7 +25,7 @@ class AnyEncodableTests: XCTestCase {
         {
             "boolean": true,
             "integer": 1,
-            "double": 3.14159265358979323846,
+            "double": 3.141592653589793,
             "string": "string",
             "array": [1, 2, 3],
             "nested": {
@@ -44,7 +44,7 @@ class AnyEncodableTests: XCTestCase {
         let dictionary: [String: NSNumber] = [
             "boolean": true,
             "integer": 1,
-            "double": 3.14159265358979323846,
+            "double": 3.141592653589793,
         ]
 
         let encoder = JSONEncoder()
@@ -56,7 +56,7 @@ class AnyEncodableTests: XCTestCase {
         {
             "boolean": true,
             "integer": 1,
-            "double": 3.14159265358979323846,
+            "double": 3.141592653589793,
         }
         """.data(using: .utf8)!
         let expectedJSONObject = try JSONSerialization.jsonObject(with: expected, options: []) as! NSDictionary
@@ -66,9 +66,47 @@ class AnyEncodableTests: XCTestCase {
         XCTAssert(encodedJSONObject["integer"] is Int)
         XCTAssert(encodedJSONObject["double"] is Double)
     }
+    
+    #if swift(>=5.0)
+    func testStringInterpolationEncoding() throws {
+        let dictionary: [String: AnyEncodable] = [
+            "boolean": "\(true)",
+            "integer": "\(1)",
+            "double": "\(3.141592653589793)",
+            "string": "\("string")",
+            "array": "\([1, 2, 3])",
+        ]
 
+        let encoder = JSONEncoder()
+
+        let json = try encoder.encode(dictionary)
+        let encodedJSONObject = try JSONSerialization.jsonObject(with: json, options: []) as! NSDictionary
+
+        let expected = """
+        {
+            "boolean": "true",
+            "integer": "1",
+            "double": "3.141592653589793",
+            "string": "string",
+            "array": "[1, 2, 3]",
+        }
+        """.data(using: .utf8)!
+        let expectedJSONObject = try JSONSerialization.jsonObject(with: expected, options: []) as! NSDictionary
+
+        XCTAssertEqual(encodedJSONObject, expectedJSONObject)
+    }
+    #endif
+
+    #if swift(>=5.0)
+    static var allTests = [
+        ("testJSONEncoding", testJSONEncoding),
+        ("testEncodeNSNumber", testEncodeNSNumber),
+        ("testStringInterpolationEncoding", testStringInterpolationEncoding),
+    ]
+    #else
     static var allTests = [
         ("testJSONEncoding", testJSONEncoding),
         ("testEncodeNSNumber", testEncodeNSNumber),
     ]
+    #endif
 }
