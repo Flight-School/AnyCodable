@@ -14,7 +14,8 @@ class AnyDecodableTests: XCTestCase {
                 "a": "alpha",
                 "b": "bravo",
                 "c": "charlie"
-            }
+            },
+            "null": null
         }
         """.data(using: .utf8)!
 
@@ -27,6 +28,7 @@ class AnyDecodableTests: XCTestCase {
         XCTAssertEqual(dictionary["string"]?.value as! String, "string")
         XCTAssertEqual(dictionary["array"]?.value as! [Int], [1, 2, 3])
         XCTAssertEqual(dictionary["nested"]?.value as! [String: String], ["a": "alpha", "b": "bravo", "c": "charlie"])
+        XCTAssertEqual(dictionary["null"]?.value as! NSNull, NSNull())
     }
 
     static var allTests = [

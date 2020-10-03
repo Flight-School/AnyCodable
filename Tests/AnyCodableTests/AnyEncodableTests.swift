@@ -14,6 +14,7 @@ class AnyEncodableTests: XCTestCase {
                 "b": "bravo",
                 "c": "charlie",
             ],
+            "null": nil
         ]
 
         let encoder = JSONEncoder()
@@ -32,7 +33,8 @@ class AnyEncodableTests: XCTestCase {
                 "a": "alpha",
                 "b": "bravo",
                 "c": "charlie"
-            }
+            },
+            "null": null
         }
         """.data(using: .utf8)!
         let expectedJSONObject = try JSONSerialization.jsonObject(with: expected, options: []) as! NSDictionary
