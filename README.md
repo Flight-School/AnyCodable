@@ -123,8 +123,8 @@ MIT
 
 Mattt ([@mattt](https://twitter.com/mattt))
 
-[build status]: https://travis-ci.com/Flight-School/AnyCodable
-[build status badge]: https://api.travis-ci.com/Flight-School/AnyCodable.svg?branch=master
+[build status]: https://github.com/Flight-School/AnyCodable/actions?query=workflow%3ACI
+[build status badge]: https://github.com/Flight-School/AnyCodable/workflows/CI/badge.svg
 [license]: https://opensource.org/licenses/MIT
 [license badge]: https://img.shields.io/cocoapods/l/AnyCodable-FlightSchool.svg
 [swift version]: https://swift.org/download/
