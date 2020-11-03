@@ -6,7 +6,7 @@ class AnyCodableTests: XCTestCase {
         let json = """
         {
             "boolean": true,
-            "integer": 42,
+            "integer": 1,
             "double": 3.141592653589793,
             "string": "string",
             "array": [1, 2, 3],
@@ -23,7 +23,7 @@ class AnyCodableTests: XCTestCase {
         let dictionary = try decoder.decode([String: AnyCodable].self, from: json)
 
         XCTAssertEqual(dictionary["boolean"]?.value as! Bool, true)
-        XCTAssertEqual(dictionary["integer"]?.value as! Int, 42)
+        XCTAssertEqual(dictionary["integer"]?.value as! Int, 1)
         XCTAssertEqual(dictionary["double"]?.value as! Double, 3.141592653589793, accuracy: 0.001)
         XCTAssertEqual(dictionary["string"]?.value as! String, "string")
         XCTAssertEqual(dictionary["array"]?.value as! [Int], [1, 2, 3])
@@ -34,7 +34,7 @@ class AnyCodableTests: XCTestCase {
     func testJSONEncoding() throws {
         let dictionary: [String: AnyCodable] = [
             "boolean": true,
-            "integer": 42,
+            "integer": 1,
             "double": 3.141592653589793,
             "string": "string",
             "array": [1, 2, 3],
@@ -54,7 +54,7 @@ class AnyCodableTests: XCTestCase {
         let expected = """
         {
             "boolean": true,
-            "integer": 42,
+            "integer": 1,
             "double": 3.141592653589793,
             "string": "string",
             "array": [1, 2, 3],
