@@ -5,7 +5,7 @@ class AnyEncodableTests: XCTestCase {
     func testJSONEncoding() throws {
         let dictionary: [String: AnyEncodable] = [
             "boolean": true,
-            "integer": 1,
+            "integer": 42,
             "double": 3.141592653589793,
             "string": "string",
             "array": [1, 2, 3],
@@ -25,7 +25,7 @@ class AnyEncodableTests: XCTestCase {
         let expected = """
         {
             "boolean": true,
-            "integer": 1,
+            "integer": 42,
             "double": 3.141592653589793,
             "string": "string",
             "array": [1, 2, 3],
@@ -45,7 +45,7 @@ class AnyEncodableTests: XCTestCase {
     func testEncodeNSNumber() throws {
         let dictionary: [String: NSNumber] = [
             "boolean": true,
-            "integer": 1,
+            "integer": 42,
             "double": 3.141592653589793,
         ]
 
@@ -57,7 +57,7 @@ class AnyEncodableTests: XCTestCase {
         let expected = """
         {
             "boolean": true,
-            "integer": 1,
+            "integer": 42,
             "double": 3.141592653589793,
         }
         """.data(using: .utf8)!
@@ -73,7 +73,7 @@ class AnyEncodableTests: XCTestCase {
     func testStringInterpolationEncoding() throws {
         let dictionary: [String: AnyEncodable] = [
             "boolean": "\(true)",
-            "integer": "\(1)",
+            "integer": "\(42)",
             "double": "\(3.141592653589793)",
             "string": "\("string")",
             "array": "\([1, 2, 3])",
@@ -87,7 +87,7 @@ class AnyEncodableTests: XCTestCase {
         let expected = """
         {
             "boolean": "true",
-            "integer": "1",
+            "integer": "42",
             "double": "3.141592653589793",
             "string": "string",
             "array": "[1, 2, 3]",
