@@ -46,18 +46,11 @@ public struct AnyEncodable: Encodable {
 }
 #endif
 
-#if swift(>=4.2)
 @usableFromInline
 protocol _AnyEncodable {
     var value: Any { get }
     init<T>(_ value: T?)
 }
-#else
-protocol _AnyEncodable {
-    var value: Any { get }
-    init<T>(_ value: T?)
-}
-#endif
 
 extension AnyEncodable: _AnyEncodable {}
 
@@ -68,11 +61,9 @@ extension _AnyEncodable {
         var container = encoder.singleValueContainer()
 
         switch value {
-#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
+#if canImport(Foundation)
         case let number as NSNumber:
             try encode(nsnumber: number, into: &container)
-#endif
-#if canImport(Foundation)
         case is NSNull:
             try container.encodeNil()
 #endif
@@ -122,7 +113,7 @@ extension _AnyEncodable {
         }
     }
 
-    #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
+    #if canImport(Foundation)
     private func encode(nsnumber: NSNumber, into container: inout SingleValueEncodingContainer) throws {
         switch CFNumberGetType(nsnumber) {
         case .charType:
@@ -147,11 +138,9 @@ extension _AnyEncodable {
             try container.encode(nsnumber.floatValue)
         case .doubleType, .float64Type, .cgFloatType:
             try container.encode(nsnumber.doubleValue)
-        #if swift(>=5.0)
         @unknown default:
             let context = EncodingError.Context(codingPath: container.codingPath, debugDescription: "NSNumber cannot be encoded because its type is not handled")
             throw EncodingError.invalidValue(nsnumber, context)
-        #endif
         }
     }
     #endif
@@ -229,9 +218,7 @@ extension AnyEncodable: ExpressibleByBooleanLiteral {}
 extension AnyEncodable: ExpressibleByIntegerLiteral {}
 extension AnyEncodable: ExpressibleByFloatLiteral {}
 extension AnyEncodable: ExpressibleByStringLiteral {}
-#if swift(>=5.0)
 extension AnyEncodable: ExpressibleByStringInterpolation {}
-#endif
 extension AnyEncodable: ExpressibleByArrayLiteral {}
 extension AnyEncodable: ExpressibleByDictionaryLiteral {}
 
