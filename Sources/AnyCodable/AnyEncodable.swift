@@ -22,7 +22,8 @@ import Foundation
              "a": "alpha",
              "b": "bravo",
              "c": "charlie"
-         ]
+         ],
+         "null": nil
      ]
 
      let encoder = JSONEncoder()

@@ -11,7 +11,8 @@ let dictionary: [String: AnyEncodable] = [
         "a": "alpha",
         "b": "bravo",
         "c": "charlie"
-    ]
+    ],
+    "null": nil
 ]
 
 let encoder = JSONEncoder()

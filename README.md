@@ -82,7 +82,8 @@ let dictionary: [String: AnyEncodable] = [
         "a": "alpha",
         "b": "bravo",
         "c": "charlie"
-    ]
+    ],
+    "null": nil
 ]
 
 let encoder = JSONEncoder()
@@ -103,7 +104,8 @@ let json = """
              "a": "alpha",
              "b": "bravo",
              "c": "charlie"
-         }
+         },
+         "null": null
      }
 """.data(using: .utf8)!
 
