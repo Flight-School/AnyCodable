@@ -1,3 +1,7 @@
+#if canImport(CoreFoundation)
+import CoreFoundation
+#endif
+
 #if canImport(Foundation)
 import Foundation
 #endif
@@ -51,12 +55,14 @@ extension _AnyEncodable {
         var container = encoder.singleValueContainer()
 
         switch value {
-#if canImport(Foundation)
+        #if canImport(Foundation)
+        #if canImport(CoreFoundation)
         case let number as NSNumber:
             try encode(nsnumber: number, into: &container)
+        #endif
         case is NSNull:
             try container.encodeNil()
-#endif
+        #endif
         case is Void:
             try container.encodeNil()
         case let bool as Bool:
@@ -87,12 +93,12 @@ extension _AnyEncodable {
             try container.encode(double)
         case let string as String:
             try container.encode(string)
-#if canImport(Foundation)
+        #if canImport(Foundation)
         case let date as Date:
             try container.encode(date)
         case let url as URL:
             try container.encode(url)
-#endif
+        #endif
         case let array as [Any?]:
             try container.encode(array.map { AnyEncodable($0) })
         case let dictionary as [String: Any?]:
@@ -103,32 +109,32 @@ extension _AnyEncodable {
         }
     }
 
-    #if canImport(Foundation)
+    #if canImport(Foundation) && canImport(CoreFoundation)
     private func encode(nsnumber: NSNumber, into container: inout SingleValueEncodingContainer) throws {
-        switch CFNumberGetType(nsnumber) {
-        case .charType:
+        switch Character(Unicode.Scalar(UInt8(nsnumber.objCType.pointee)))  {
+        case "c", "C":
             try container.encode(nsnumber.boolValue)
-        case .sInt8Type:
+        case "s":
             try container.encode(nsnumber.int8Value)
-        case .sInt16Type:
+        case "i":
             try container.encode(nsnumber.int16Value)
-        case .sInt32Type:
+        case "l":
             try container.encode(nsnumber.int32Value)
-        case .sInt64Type:
+        case "q":
             try container.encode(nsnumber.int64Value)
-        case .shortType:
+        case "S":
+            try container.encode(nsnumber.uint8Value)
+        case "I":
             try container.encode(nsnumber.uint16Value)
-        case .longType:
+        case "L":
             try container.encode(nsnumber.uint32Value)
-        case .longLongType:
+        case "Q":
             try container.encode(nsnumber.uint64Value)
-        case .intType, .nsIntegerType, .cfIndexType:
-            try container.encode(nsnumber.intValue)
-        case .floatType, .float32Type:
+        case "f":
             try container.encode(nsnumber.floatValue)
-        case .doubleType, .float64Type, .cgFloatType:
+        case "d":
             try container.encode(nsnumber.doubleValue)
-        @unknown default:
+        default:
             let context = EncodingError.Context(codingPath: container.codingPath, debugDescription: "NSNumber cannot be encoded because its type is not handled")
             throw EncodingError.invalidValue(nsnumber, context)
         }
