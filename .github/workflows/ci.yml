@@ -21,7 +21,11 @@ jobs:
 
     strategy:
       matrix:
-        swift: ["5.1", "5.2", "latest"]
+        swift:
+          - "5.1"
+          - "5.2"
+          - "5.3"
+          - latest
 
     container:
       image: swift:${{ matrix.swift }}
