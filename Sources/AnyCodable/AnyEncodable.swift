@@ -1,7 +1,3 @@
-#if canImport(CoreFoundation)
-import CoreFoundation
-#endif
-
 #if canImport(Foundation)
 import Foundation
 #endif
@@ -56,10 +52,8 @@ extension _AnyEncodable {
 
         switch value {
         #if canImport(Foundation)
-        #if canImport(CoreFoundation)
         case let number as NSNumber:
             try encode(nsnumber: number, into: &container)
-        #endif
         case is NSNull:
             try container.encodeNil()
         #endif
@@ -109,7 +103,7 @@ extension _AnyEncodable {
         }
     }
 
-    #if canImport(Foundation) && canImport(CoreFoundation)
+    #if canImport(Foundation)
     private func encode(nsnumber: NSNumber, into container: inout SingleValueEncodingContainer) throws {
         switch Character(Unicode.Scalar(UInt8(nsnumber.objCType.pointee)))  {
         case "c", "C":
