@@ -128,7 +128,7 @@ Mattt ([@mattt](https://twitter.com/mattt))
 [license]: https://opensource.org/licenses/MIT
 [license badge]: https://img.shields.io/cocoapods/l/AnyCodable-FlightSchool.svg
 [swift version]: https://swift.org/download/
-[swift version badge]: https://img.shields.io/badge/swift%20version-4.0+-orange.svg
+[swift version badge]: https://img.shields.io/badge/swift%20version-5.1+-orange.svg
 [cocoapods platforms badge]: https://img.shields.io/cocoapods/p/AnyCodable-FlightSchool.svg
 [cocoapods]: https://cocoapods.org/pods/AnyCodable-FlightSchool
 [cocoapods badge]: https://img.shields.io/cocoapods/v/AnyCodable-FlightSchool.svg
