@@ -68,8 +68,7 @@ class AnyEncodableTests: XCTestCase {
         XCTAssert(encodedJSONObject["integer"] is Int)
         XCTAssert(encodedJSONObject["double"] is Double)
     }
-    
-    #if swift(>=5.0)
+
     func testStringInterpolationEncoding() throws {
         let dictionary: [String: AnyEncodable] = [
             "boolean": "\(true)",
@@ -97,18 +96,4 @@ class AnyEncodableTests: XCTestCase {
 
         XCTAssertEqual(encodedJSONObject, expectedJSONObject)
     }
-    #endif
-
-    #if swift(>=5.0)
-    static var allTests = [
-        ("testJSONEncoding", testJSONEncoding),
-        ("testEncodeNSNumber", testEncodeNSNumber),
-        ("testStringInterpolationEncoding", testStringInterpolationEncoding),
-    ]
-    #else
-    static var allTests = [
-        ("testJSONEncoding", testJSONEncoding),
-        ("testEncodeNSNumber", testEncodeNSNumber),
-    ]
-    #endif
 }

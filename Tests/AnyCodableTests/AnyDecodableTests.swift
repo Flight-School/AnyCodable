@@ -30,8 +30,4 @@ class AnyDecodableTests: XCTestCase {
         XCTAssertEqual(dictionary["nested"]?.value as! [String: String], ["a": "alpha", "b": "bravo", "c": "charlie"])
         XCTAssertEqual(dictionary["null"]?.value as! NSNull, NSNull())
     }
-
-    static var allTests = [
-        ("testJSONDecoding", testJSONDecoding),
-    ]
 }

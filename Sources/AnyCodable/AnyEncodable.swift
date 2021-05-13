@@ -28,7 +28,6 @@ import Foundation
      let encoder = JSONEncoder()
      let json = try! encoder.encode(dictionary)
  */
-#if swift(>=5.1)
 @frozen public struct AnyEncodable: Encodable {
     public let value: Any
 
@@ -36,28 +35,12 @@ import Foundation
         self.value = value ?? ()
     }
 }
-#else
-public struct AnyEncodable: Encodable {
-    public let value: Any
 
-    public init<T>(_ value: T?) {
-        self.value = value ?? ()
-    }
-}
-#endif
-
-#if swift(>=4.2)
 @usableFromInline
 protocol _AnyEncodable {
     var value: Any { get }
     init<T>(_ value: T?)
 }
-#else
-protocol _AnyEncodable {
-    var value: Any { get }
-    init<T>(_ value: T?)
-}
-#endif
 
 extension AnyEncodable: _AnyEncodable {}
 
@@ -68,14 +51,12 @@ extension _AnyEncodable {
         var container = encoder.singleValueContainer()
 
         switch value {
-#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
+        #if canImport(Foundation)
         case let number as NSNumber:
             try encode(nsnumber: number, into: &container)
-#endif
-#if canImport(Foundation)
         case is NSNull:
             try container.encodeNil()
-#endif
+        #endif
         case is Void:
             try container.encodeNil()
         case let bool as Bool:
@@ -106,12 +87,12 @@ extension _AnyEncodable {
             try container.encode(double)
         case let string as String:
             try container.encode(string)
-#if canImport(Foundation)
+        #if canImport(Foundation)
         case let date as Date:
             try container.encode(date)
         case let url as URL:
             try container.encode(url)
-#endif
+        #endif
         case let array as [Any?]:
             try container.encode(array.map { AnyEncodable($0) })
         case let dictionary as [String: Any?]:
@@ -122,36 +103,34 @@ extension _AnyEncodable {
         }
     }
 
-    #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
+    #if canImport(Foundation)
     private func encode(nsnumber: NSNumber, into container: inout SingleValueEncodingContainer) throws {
-        switch CFNumberGetType(nsnumber) {
-        case .charType:
+        switch Character(Unicode.Scalar(UInt8(nsnumber.objCType.pointee)))  {
+        case "c", "C":
             try container.encode(nsnumber.boolValue)
-        case .sInt8Type:
+        case "s":
             try container.encode(nsnumber.int8Value)
-        case .sInt16Type:
+        case "i":
             try container.encode(nsnumber.int16Value)
-        case .sInt32Type:
+        case "l":
             try container.encode(nsnumber.int32Value)
-        case .sInt64Type:
+        case "q":
             try container.encode(nsnumber.int64Value)
-        case .shortType:
+        case "S":
+            try container.encode(nsnumber.uint8Value)
+        case "I":
             try container.encode(nsnumber.uint16Value)
-        case .longType:
+        case "L":
             try container.encode(nsnumber.uint32Value)
-        case .longLongType:
+        case "Q":
             try container.encode(nsnumber.uint64Value)
-        case .intType, .nsIntegerType, .cfIndexType:
-            try container.encode(nsnumber.intValue)
-        case .floatType, .float32Type:
+        case "f":
             try container.encode(nsnumber.floatValue)
-        case .doubleType, .float64Type, .cgFloatType:
+        case "d":
             try container.encode(nsnumber.doubleValue)
-        #if swift(>=5.0)
-        @unknown default:
+        default:
             let context = EncodingError.Context(codingPath: container.codingPath, debugDescription: "NSNumber cannot be encoded because its type is not handled")
             throw EncodingError.invalidValue(nsnumber, context)
-        #endif
         }
     }
     #endif
@@ -229,9 +208,7 @@ extension AnyEncodable: ExpressibleByBooleanLiteral {}
 extension AnyEncodable: ExpressibleByIntegerLiteral {}
 extension AnyEncodable: ExpressibleByFloatLiteral {}
 extension AnyEncodable: ExpressibleByStringLiteral {}
-#if swift(>=5.0)
 extension AnyEncodable: ExpressibleByStringInterpolation {}
-#endif
 extension AnyEncodable: ExpressibleByArrayLiteral {}
 extension AnyEncodable: ExpressibleByDictionaryLiteral {}
 

@@ -30,7 +30,6 @@ import Foundation
      let decoder = JSONDecoder()
      let dictionary = try! decoder.decode([String: AnyDecodable].self, from: json)
  */
-#if swift(>=5.1)
 @frozen public struct AnyDecodable: Decodable {
     public let value: Any
 
@@ -38,28 +37,12 @@ import Foundation
         self.value = value ?? ()
     }
 }
-#else
-public struct AnyDecodable: Decodable {
-    public let value: Any
 
-    public init<T>(_ value: T?) {
-        self.value = value ?? ()
-    }
-}
-#endif
-
-#if swift(>=4.2)
 @usableFromInline
 protocol _AnyDecodable {
     var value: Any { get }
     init<T>(_ value: T?)
 }
-#else
-protocol _AnyDecodable {
-    var value: Any { get }
-    init<T>(_ value: T?)
-}
-#endif
 
 extension AnyDecodable: _AnyDecodable {}
 
