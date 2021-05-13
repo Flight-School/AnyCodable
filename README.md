@@ -94,19 +94,19 @@ let json = try! encoder.encode(dictionary)
 
 ```swift
 let json = """
-     {
-         "boolean": true,
-         "integer": 1,
-         "double": 3.141592653589793,
-         "string": "string",
-         "array": [1, 2, 3],
-         "nested": {
-             "a": "alpha",
-             "b": "bravo",
-             "c": "charlie"
-         },
-         "null": null
-     }
+{
+    "boolean": true,
+    "integer": 1,
+    "double": 3.141592653589793,
+    "string": "string",
+    "array": [1, 2, 3],
+    "nested": {
+        "a": "alpha",
+        "b": "bravo",
+        "c": "charlie"
+    },
+    "null": null
+}
 """.data(using: .utf8)!
 
 let decoder = JSONDecoder()
