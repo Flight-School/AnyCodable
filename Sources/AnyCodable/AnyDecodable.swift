@@ -145,3 +145,44 @@ extension AnyDecodable: CustomDebugStringConvertible {
         }
     }
 }
+
+extension AnyDecodable: Hashable {
+    public func hash(into hasher: inout Hasher) {
+        switch value {
+        case let value as Bool:
+            hasher.combine(value)
+        case let value as Int:
+            hasher.combine(value)
+        case let value as Int8:
+            hasher.combine(value)
+        case let value as Int16:
+            hasher.combine(value)
+        case let value as Int32:
+            hasher.combine(value)
+        case let value as Int64:
+            hasher.combine(value)
+        case let value as UInt:
+            hasher.combine(value)
+        case let value as UInt8:
+            hasher.combine(value)
+        case let value as UInt16:
+            hasher.combine(value)
+        case let value as UInt32:
+            hasher.combine(value)
+        case let value as UInt64:
+            hasher.combine(value)
+        case let value as Float:
+            hasher.combine(value)
+        case let value as Double:
+            hasher.combine(value)
+        case let value as String:
+            hasher.combine(value)
+        case let value as [String: AnyDecodable]:
+            hasher.combine(value)
+        case let value as [AnyDecodable]:
+            hasher.combine(value)
+        default:
+            break
+        }
+    }
+}
