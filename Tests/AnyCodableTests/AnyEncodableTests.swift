@@ -2,6 +2,28 @@
 import XCTest
 
 class AnyEncodableTests: XCTestCase {
+
+    func testEquivalency() {
+        let boolean = true
+        let integer = 42
+        let double = 3.141592653589793
+        let string = "string"
+        let array = [1, 2, 3]
+        let nested = [
+            "a": "alpha",
+            "b": "bravo",
+            "c": "charlie",
+        ]
+        XCTAssertEqual(AnyEncodable(boolean), AnyEncodable(boolean))
+        XCTAssertEqual(AnyEncodable(integer), AnyEncodable(integer))
+        XCTAssertEqual(AnyEncodable(double), AnyEncodable(double))
+        XCTAssertEqual(AnyEncodable(string), AnyEncodable(string))
+        XCTAssertEqual(AnyEncodable(array), AnyEncodable(array))
+        XCTAssertEqual(AnyEncodable(nested), AnyEncodable(nested))
+        XCTAssertNotEqual(AnyEncodable(array), AnyEncodable([1, 2, 4]))
+        XCTAssertNotEqual(AnyEncodable(nested), AnyEncodable(["a": "apple", "b": "banana", "c": "cherry"]))
+    }
+
     func testJSONEncoding() throws {
         let dictionary: [String: AnyEncodable] = [
             "boolean": true,

@@ -2,6 +2,28 @@
 import XCTest
 
 class AnyCodableTests: XCTestCase {
+
+    func testEquivalency() {
+        let boolean = true
+        let integer = 42
+        let double = 3.141592653589793
+        let string = "string"
+        let array = [1, 2, 3]
+        let nested = [
+            "a": "alpha",
+            "b": "bravo",
+            "c": "charlie",
+        ]
+        XCTAssertEqual(AnyCodable(boolean), AnyCodable(boolean))
+        XCTAssertEqual(AnyCodable(integer), AnyCodable(integer))
+        XCTAssertEqual(AnyCodable(double), AnyCodable(double))
+        XCTAssertEqual(AnyCodable(string), AnyCodable(string))
+        XCTAssertEqual(AnyCodable(array), AnyCodable(array))
+        XCTAssertEqual(AnyCodable(nested), AnyCodable(nested))
+        XCTAssertNotEqual(AnyCodable(array), AnyCodable([1, 2, 4]))
+        XCTAssertNotEqual(AnyCodable(nested), AnyCodable(["a": "apple", "b": "banana", "c": "cherry"]))
+    }
+
     func testJSONDecoding() throws {
         let json = """
         {
