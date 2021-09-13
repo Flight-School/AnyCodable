@@ -1,21 +1,24 @@
 @testable import AnyCodable
 import XCTest
 
-struct SomeCodable: Codable {
-    var string: String
-    var int: Int
-    var bool: Bool
-    var hasUnderscore: String
-    
-    enum CodingKeys: String,CodingKey {
-        case string
-        case int
-        case bool
-        case hasUnderscore = "has_underscore"
-    }
-}
+
 
 class AnyCodableTests: XCTestCase {
+    
+    struct SomeCodable: Codable {
+        var string: String
+        var int: Int
+        var bool: Bool
+        var hasUnderscore: String
+        
+        enum CodingKeys: String,CodingKey {
+            case string
+            case int
+            case bool
+            case hasUnderscore = "has_underscore"
+        }
+    }
+    
     func testJSONDecoding() throws {
         let json = """
         {
