@@ -1,7 +1,24 @@
 @testable import AnyCodable
 import XCTest
 
+
+
 class AnyCodableTests: XCTestCase {
+    
+    struct SomeCodable: Codable {
+        var string: String
+        var int: Int
+        var bool: Bool
+        var hasUnderscore: String
+        
+        enum CodingKeys: String,CodingKey {
+            case string
+            case int
+            case bool
+            case hasUnderscore = "has_underscore"
+        }
+    }
+    
     func testJSONDecoding() throws {
         let json = """
         {
@@ -32,6 +49,9 @@ class AnyCodableTests: XCTestCase {
     }
 
     func testJSONEncoding() throws {
+        
+        let someCodable = AnyCodable(SomeCodable(string: "String", int: 100, bool: true, hasUnderscore: "another string"))
+        
         let dictionary: [String: AnyCodable] = [
             "boolean": true,
             "integer": 42,
@@ -43,6 +63,7 @@ class AnyCodableTests: XCTestCase {
                 "b": "bravo",
                 "c": "charlie",
             ],
+            "someCodable": someCodable,
             "null": nil
         ]
 
@@ -62,6 +83,12 @@ class AnyCodableTests: XCTestCase {
                 "a": "alpha",
                 "b": "bravo",
                 "c": "charlie"
+            },
+            "someCodable": {
+                "string":"String",
+                "int":100,
+                "bool": true,
+                "has_underscore":"another string"
             },
             "null": null
         }

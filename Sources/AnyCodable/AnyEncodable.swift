@@ -98,6 +98,8 @@ extension _AnyEncodable {
             try container.encode(array.map { AnyEncodable($0) })
         case let dictionary as [String: Any?]:
             try container.encode(dictionary.mapValues { AnyEncodable($0) })
+        case let encodable as Encodable:
+            try encodable.encode(to: encoder)
         default:
             let context = EncodingError.Context(codingPath: container.codingPath, debugDescription: "AnyEncodable value cannot be encoded")
             throw EncodingError.invalidValue(value, context)
