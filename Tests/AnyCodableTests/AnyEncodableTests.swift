@@ -2,7 +2,25 @@
 import XCTest
 
 class AnyEncodableTests: XCTestCase {
+    
+    struct SomeEncodable: Encodable {
+        var string: String
+        var int: Int
+        var bool: Bool
+        var hasUnderscore: String
+        
+        enum CodingKeys: String,CodingKey {
+            case string
+            case int
+            case bool
+            case hasUnderscore = "has_underscore"
+        }
+    }
+    
     func testJSONEncoding() throws {
+        
+        let someEncodable = AnyEncodable(SomeEncodable(string: "String", int: 100, bool: true, hasUnderscore: "another string"))
+        
         let dictionary: [String: AnyEncodable] = [
             "boolean": true,
             "integer": 42,
@@ -14,6 +32,7 @@ class AnyEncodableTests: XCTestCase {
                 "b": "bravo",
                 "c": "charlie",
             ],
+            "someCodable": someEncodable,
             "null": nil
         ]
 
@@ -33,6 +52,12 @@ class AnyEncodableTests: XCTestCase {
                 "a": "alpha",
                 "b": "bravo",
                 "c": "charlie"
+            },
+            "someCodable": {
+                "string":"String",
+                "int":100,
+                "bool": true,
+                "has_underscore":"another string"
             },
             "null": null
         }
