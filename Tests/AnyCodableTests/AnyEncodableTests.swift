@@ -43,7 +43,7 @@ class AnyEncodableTests: XCTestCase {
 
         let expected = """
         {
-            "boolean": true,
+            "boolean": 1,
             "integer": 42,
             "double": 3.141592653589793,
             "string": "string",
@@ -90,7 +90,7 @@ class AnyEncodableTests: XCTestCase {
 
         let expected = """
         {
-            "boolean": true,
+            "boolean": 1,
             "char": -127,
             "int": -32767,
             "short": -32767,

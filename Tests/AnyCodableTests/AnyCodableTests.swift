@@ -74,7 +74,7 @@ class AnyCodableTests: XCTestCase {
 
         let expected = """
         {
-            "boolean": true,
+            "boolean": 1,
             "integer": 42,
             "double": 3.141592653589793,
             "string": "string",
