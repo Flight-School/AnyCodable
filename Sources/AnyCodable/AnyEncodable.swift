@@ -109,21 +109,21 @@ extension _AnyEncodable {
     #if canImport(Foundation)
     private func encode(nsnumber: NSNumber, into container: inout SingleValueEncodingContainer) throws {
         switch Character(Unicode.Scalar(UInt8(nsnumber.objCType.pointee)))  {
-        case "B":
+        case "c", "C":
             try container.encode(nsnumber.boolValue)
-        case "c":
-            try container.encode(nsnumber.int8Value)
         case "s":
+            try container.encode(nsnumber.int8Value)
+        case "i":
             try container.encode(nsnumber.int16Value)
-        case "i", "l":
+        case "l":
             try container.encode(nsnumber.int32Value)
         case "q":
             try container.encode(nsnumber.int64Value)
-        case "C":
-            try container.encode(nsnumber.uint8Value)
         case "S":
+            try container.encode(nsnumber.uint8Value)
+        case "I":
             try container.encode(nsnumber.uint16Value)
-        case "I", "L":
+        case "L":
             try container.encode(nsnumber.uint32Value)
         case "Q":
             try container.encode(nsnumber.uint64Value)

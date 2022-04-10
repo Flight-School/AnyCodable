@@ -43,7 +43,7 @@ class AnyEncodableTests: XCTestCase {
 
         let expected = """
         {
-            "boolean": 1,
+            "boolean": true,
             "integer": 42,
             "double": 3.141592653589793,
             "string": "string",
@@ -70,16 +70,7 @@ class AnyEncodableTests: XCTestCase {
     func testEncodeNSNumber() throws {
         let dictionary: [String: NSNumber] = [
             "boolean": true,
-            "char": -127,
-            "int": -32767,
-            "short": -32767,
-            "long": -2147483647,
-            "longlong": -9223372036854775807,
-            "uchar": 255,
-            "uint": 65535,
-            "ushort": 65535,
-            "ulong": 4294967295,
-            "ulonglong": 18446744073709615,
+            "integer": 42,
             "double": 3.141592653589793,
         ]
 
@@ -90,17 +81,8 @@ class AnyEncodableTests: XCTestCase {
 
         let expected = """
         {
-            "boolean": 1,
-            "char": -127,
-            "int": -32767,
-            "short": -32767,
-            "long": -2147483647,
-            "longlong": -9223372036854775807,
-            "uchar": 255,
-            "uint": 65535,
-            "ushort": 65535,
-            "ulong": 4294967295,
-            "ulonglong": 18446744073709615,
+            "boolean": true,
+            "integer": 42,
             "double": 3.141592653589793,
         }
         """.data(using: .utf8)!
@@ -108,19 +90,7 @@ class AnyEncodableTests: XCTestCase {
 
         XCTAssertEqual(encodedJSONObject, expectedJSONObject)
         XCTAssert(encodedJSONObject["boolean"] is Bool)
-
-        XCTAssert(encodedJSONObject["char"] is Int8)
-        XCTAssert(encodedJSONObject["int"] is Int16)
-        XCTAssert(encodedJSONObject["short"] is Int32)
-        XCTAssert(encodedJSONObject["long"] is Int32)
-        XCTAssert(encodedJSONObject["longlong"] is Int64)
-
-        XCTAssert(encodedJSONObject["uchar"] is UInt8)
-        XCTAssert(encodedJSONObject["uint"] is UInt16)
-        XCTAssert(encodedJSONObject["ushort"] is UInt32)
-        XCTAssert(encodedJSONObject["ulong"] is UInt32)
-        XCTAssert(encodedJSONObject["ulonglong"] is UInt64)
-
+        XCTAssert(encodedJSONObject["integer"] is Int)
         XCTAssert(encodedJSONObject["double"] is Double)
     }
 
