@@ -48,6 +48,36 @@ class AnyCodableTests: XCTestCase {
         XCTAssertEqual(dictionary["null"]?.value as! NSNull, NSNull())
     }
 
+    func testJSONDecodingEquatable() throws {
+        let json = """
+        {
+            "boolean": true,
+            "integer": 42,
+            "double": 3.141592653589793,
+            "string": "string",
+            "array": [1, 2, 3],
+            "nested": {
+                "a": "alpha",
+                "b": "bravo",
+                "c": "charlie"
+            },
+            "null": null
+        }
+        """.data(using: .utf8)!
+        
+        let decoder = JSONDecoder()
+        let dictionary1 = try decoder.decode([String: AnyCodable].self, from: json)
+        let dictionary2 = try decoder.decode([String: AnyCodable].self, from: json)
+
+        XCTAssertEqual(dictionary1["boolean"], dictionary2["boolean"])
+        XCTAssertEqual(dictionary1["integer"], dictionary2["integer"])
+        XCTAssertEqual(dictionary1["double"], dictionary2["double"])
+        XCTAssertEqual(dictionary1["string"], dictionary2["string"])
+        XCTAssertEqual(dictionary1["array"], dictionary2["array"])
+        XCTAssertEqual(dictionary1["nested"], dictionary2["nested"])
+        XCTAssertEqual(dictionary1["null"], dictionary2["null"])
+    }
+
     func testJSONEncoding() throws {
         
         let someCodable = AnyCodable(SomeCodable(string: "String", int: 100, bool: true, hasUnderscore: "another string"))
