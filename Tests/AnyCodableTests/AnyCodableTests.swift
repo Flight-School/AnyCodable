@@ -81,12 +81,14 @@ class AnyCodableTests: XCTestCase {
     func testJSONEncoding() throws {
         
         let someCodable = AnyCodable(SomeCodable(string: "String", int: 100, bool: true, hasUnderscore: "another string"))
-        
+
+        let injectedValue = 1234
         let dictionary: [String: AnyCodable] = [
             "boolean": true,
             "integer": 42,
             "double": 3.141592653589793,
             "string": "string",
+            "stringInterpolation": "string \(injectedValue)",
             "array": [1, 2, 3],
             "nested": [
                 "a": "alpha",
@@ -108,6 +110,7 @@ class AnyCodableTests: XCTestCase {
             "integer": 42,
             "double": 3.141592653589793,
             "string": "string",
+            "stringInterpolation": "string 1234",
             "array": [1, 2, 3],
             "nested": {
                 "a": "alpha",
