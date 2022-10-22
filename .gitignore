@@ -10,3 +10,4 @@ DeriveredData/
 /*.gcno
 **/xcshareddata/WorkspaceSettings.xcsettings
 Carthage/Build/
+/.swiftpm
