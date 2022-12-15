@@ -114,7 +114,11 @@ extension AnyDecodable: Equatable {
             return lhs == rhs
         case let (lhs as [String: AnyDecodable], rhs as [String: AnyDecodable]):
             return lhs == rhs
+        case let (lhs as [String: AnyHashable], rhs as [String: AnyHashable]):
+            return lhs == rhs
         case let (lhs as [AnyDecodable], rhs as [AnyDecodable]):
+            return lhs == rhs
+        case let (lhs as [AnyHashable], rhs as [AnyHashable]):
             return lhs == rhs
         default:
             return false
