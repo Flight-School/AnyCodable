@@ -31,7 +31,7 @@ import Foundation
      let decoder = JSONDecoder()
      let dictionary = try! decoder.decode([String: AnyDecodable].self, from: json)
  */
-@frozen public struct AnyDecodable: Decodable {
+@frozen public struct AnyDecodable: Decodable, @unchecked Sendable {
     public let value: Any
 
     public init<T>(_ value: T?) {

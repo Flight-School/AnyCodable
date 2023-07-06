@@ -29,7 +29,7 @@ import Foundation
      let encoder = JSONEncoder()
      let json = try! encoder.encode(dictionary)
  */
-@frozen public struct AnyEncodable: Encodable {
+@frozen public struct AnyEncodable: Encodable, @unchecked Sendable {
     public let value: Any
 
     public init<T>(_ value: T?) {
