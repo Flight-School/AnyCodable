@@ -12,6 +12,15 @@ import Foundation
  - SeeAlso: `AnyEncodable`
  - SeeAlso: `AnyDecodable`
  */
+#if compiler(>=5.6)
+@preconcurrency @frozen public struct AnyCodable: Codable, @unchecked Sendable {
+    public let value: Any
+
+    public init<T>(_ value: T?) {
+        self.value = value ?? ()
+    }
+}
+#else
 @frozen public struct AnyCodable: Codable {
     public let value: Any
 
@@ -19,6 +28,7 @@ import Foundation
         self.value = value ?? ()
     }
 }
+#endif
 
 extension AnyCodable: _AnyEncodable, _AnyDecodable {}
 

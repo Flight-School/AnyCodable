@@ -29,6 +29,15 @@ import Foundation
      let encoder = JSONEncoder()
      let json = try! encoder.encode(dictionary)
  */
+#if compiler(>=5.6)
+@preconcurrency @frozen public struct AnyEncodable: Encodable, @unchecked Sendable {
+    public let value: Any
+
+    public init<T>(_ value: T?) {
+        self.value = value ?? ()
+    }
+}
+#else
 @frozen public struct AnyEncodable: Encodable {
     public let value: Any
 
@@ -36,6 +45,7 @@ import Foundation
         self.value = value ?? ()
     }
 }
+#endif
 
 @usableFromInline
 protocol _AnyEncodable {
