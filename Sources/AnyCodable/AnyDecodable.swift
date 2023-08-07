@@ -31,13 +31,23 @@ import Foundation
      let decoder = JSONDecoder()
      let dictionary = try! decoder.decode([String: AnyDecodable].self, from: json)
  */
-@frozen public struct AnyDecodable: Decodable, @unchecked Sendable {
+#if compiler(>=5.6)
+@preconcurrency @frozen public struct AnyDecodable: Decodable, @unchecked Sendable {
     public let value: Any
 
     public init<T>(_ value: T?) {
         self.value = value ?? ()
     }
 }
+#else
+@frozen public struct AnyDecodable: Decodable {
+    public let value: Any
+
+    public init<T>(_ value: T?) {
+        self.value = value ?? ()
+    }
+}
+#endif
 
 @usableFromInline
 protocol _AnyDecodable {
