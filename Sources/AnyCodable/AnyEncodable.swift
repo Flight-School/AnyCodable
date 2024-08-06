@@ -55,6 +55,8 @@ extension _AnyEncodable {
         #if canImport(Foundation)
         case is NSNull:
             try container.encodeNil()
+        case let number as NSNumber:
+            try encode(nsnumber: number, into: &container)
         #endif
         case is Void:
             try container.encodeNil()
@@ -87,8 +89,6 @@ extension _AnyEncodable {
         case let string as String:
             try container.encode(string)
         #if canImport(Foundation)
-        case let number as NSNumber:
-            try encode(nsnumber: number, into: &container)
         case let date as Date:
             try container.encode(date)
         case let url as URL:
@@ -108,28 +108,24 @@ extension _AnyEncodable {
 
     #if canImport(Foundation)
     private func encode(nsnumber: NSNumber, into container: inout SingleValueEncodingContainer) throws {
-        switch Character(Unicode.Scalar(UInt8(nsnumber.objCType.pointee)))  {
-        case "B":
+        switch UInt32(nsnumber.objCType.pointee)  {
+        case cpp_or_c99_bool_objc_encoding, char_objc_encoding, unsigned_char_objc_encoding:
             try container.encode(nsnumber.boolValue)
-        case "c":
-            try container.encode(nsnumber.int8Value)
-        case "s":
+        case short_objc_encoding:
             try container.encode(nsnumber.int16Value)
-        case "i", "l":
+        case int_objc_encoding, long_objc_encoding:
             try container.encode(nsnumber.int32Value)
-        case "q":
+        case long_long_objc_encoding:
             try container.encode(nsnumber.int64Value)
-        case "C":
-            try container.encode(nsnumber.uint8Value)
-        case "S":
+        case unsigned_short_objc_encoding:
             try container.encode(nsnumber.uint16Value)
-        case "I", "L":
+        case unsigned_int_objc_encoding, unsigned_long_objc_encoding:
             try container.encode(nsnumber.uint32Value)
-        case "Q":
+        case unsigned_long_long_objc_encoding:
             try container.encode(nsnumber.uint64Value)
-        case "f":
+        case float_objc_encoding:
             try container.encode(nsnumber.floatValue)
-        case "d":
+        case double_objc_encoding:
             try container.encode(nsnumber.doubleValue)
         default:
             let context = EncodingError.Context(codingPath: container.codingPath, debugDescription: "NSNumber cannot be encoded because its type is not handled")
@@ -289,3 +285,21 @@ extension AnyEncodable: Hashable {
         }
     }
 }
+
+
+#if canImport(Foundation)
+  // Types encodings: https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ObjCRuntimeGuide/Articles/ocrtTypeEncodings.html
+  private let cpp_or_c99_bool_objc_encoding = "B".unicodeScalars.first?.value
+  private let char_objc_encoding = "c".unicodeScalars.first?.value
+  private let short_objc_encoding = "s".unicodeScalars.first?.value
+  private let int_objc_encoding = "i".unicodeScalars.first?.value
+  private let long_objc_encoding = "l".unicodeScalars.first?.value
+  private let long_long_objc_encoding = "q".unicodeScalars.first?.value
+  private let unsigned_char_objc_encoding = "C".unicodeScalars.first?.value
+  private let unsigned_short_objc_encoding = "S".unicodeScalars.first?.value
+  private let unsigned_int_objc_encoding = "I".unicodeScalars.first?.value
+  private let unsigned_long_objc_encoding = "L".unicodeScalars.first?.value
+  private let unsigned_long_long_objc_encoding = "Q".unicodeScalars.first?.value
+  private let float_objc_encoding = "f".unicodeScalars.first?.value
+  private let double_objc_encoding = "d".unicodeScalars.first?.value
+#endif

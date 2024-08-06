@@ -20,10 +20,12 @@ class AnyEncodableTests: XCTestCase {
     func testJSONEncoding() throws {
         
         let someEncodable = AnyEncodable(SomeEncodable(string: "String", int: 100, bool: true, hasUnderscore: "another string"))
-        
+        let nsNumber = AnyEncodable(1 as NSNumber)
+
         let dictionary: [String: AnyEncodable] = [
             "boolean": true,
             "integer": 42,
+            "nsNumber": nsNumber,
             "double": 3.141592653589793,
             "string": "string",
             "array": [1, 2, 3],
@@ -35,11 +37,8 @@ class AnyEncodableTests: XCTestCase {
             "someCodable": someEncodable,
             "null": nil
         ]
+        let json = try JSONEncoder().encode(dictionary)
 
-        let encoder = JSONEncoder()
-
-        let json = try encoder.encode(dictionary)
-        let encodedJSONObject = try JSONSerialization.jsonObject(with: json, options: []) as! NSDictionary
 
         let expected = """
         {
@@ -53,6 +52,7 @@ class AnyEncodableTests: XCTestCase {
                 "b": "bravo",
                 "c": "charlie"
             },
+            "nsNumber": 1,
             "someCodable": {
                 "string":"String",
                 "int":100,
@@ -61,10 +61,8 @@ class AnyEncodableTests: XCTestCase {
             },
             "null": null
         }
-        """.data(using: .utf8)!
-        let expectedJSONObject = try JSONSerialization.jsonObject(with: expected, options: []) as! NSDictionary
-
-        XCTAssertEqual(encodedJSONObject, expectedJSONObject)
+        """
+        try XCTAssertJsonAreIdentical(json, expected)
     }
 
     func testEncodeNSNumber() throws {
@@ -83,10 +81,7 @@ class AnyEncodableTests: XCTestCase {
             "double": 3.141592653589793,
         ]
 
-        let encoder = JSONEncoder()
-
-        let json = try encoder.encode(AnyEncodable(dictionary))
-        let encodedJSONObject = try JSONSerialization.jsonObject(with: json, options: []) as! NSDictionary
+        let json = try JSONEncoder().encode(AnyEncodable(dictionary))
 
         let expected = """
         {
@@ -103,25 +98,8 @@ class AnyEncodableTests: XCTestCase {
             "ulonglong": 18446744073709615,
             "double": 3.141592653589793,
         }
-        """.data(using: .utf8)!
-        let expectedJSONObject = try JSONSerialization.jsonObject(with: expected, options: []) as! NSDictionary
-
-        XCTAssertEqual(encodedJSONObject, expectedJSONObject)
-        XCTAssert(encodedJSONObject["boolean"] is Bool)
-
-        XCTAssert(encodedJSONObject["char"] is Int8)
-        XCTAssert(encodedJSONObject["int"] is Int16)
-        XCTAssert(encodedJSONObject["short"] is Int32)
-        XCTAssert(encodedJSONObject["long"] is Int32)
-        XCTAssert(encodedJSONObject["longlong"] is Int64)
-
-        XCTAssert(encodedJSONObject["uchar"] is UInt8)
-        XCTAssert(encodedJSONObject["uint"] is UInt16)
-        XCTAssert(encodedJSONObject["ushort"] is UInt32)
-        XCTAssert(encodedJSONObject["ulong"] is UInt32)
-        XCTAssert(encodedJSONObject["ulonglong"] is UInt64)
-
-        XCTAssert(encodedJSONObject["double"] is Double)
+        """
+        try XCTAssertJsonAreIdentical(json, expected)
     }
 
     func testStringInterpolationEncoding() throws {
@@ -132,11 +110,7 @@ class AnyEncodableTests: XCTestCase {
             "string": "\("string")",
             "array": "\([1, 2, 3])",
         ]
-
-        let encoder = JSONEncoder()
-
-        let json = try encoder.encode(dictionary)
-        let encodedJSONObject = try JSONSerialization.jsonObject(with: json, options: []) as! NSDictionary
+        let json = try JSONEncoder().encode(dictionary)
 
         let expected = """
         {
@@ -146,9 +120,38 @@ class AnyEncodableTests: XCTestCase {
             "string": "string",
             "array": "[1, 2, 3]",
         }
-        """.data(using: .utf8)!
-        let expectedJSONObject = try JSONSerialization.jsonObject(with: expected, options: []) as! NSDictionary
+        """
 
-        XCTAssertEqual(encodedJSONObject, expectedJSONObject)
+      try XCTAssertJsonAreIdentical(json, expected)
     }
+}
+
+
+
+func XCTAssertJsonAreIdentical(_ expression1: String, _ expression2: String, options: JSONSerialization.WritingOptions? = nil) throws {
+  let data = try XCTUnwrap(expression1.data(using: .utf8))
+  try XCTAssertJsonAreIdentical(data, expression2, options: options)
+}
+
+func XCTAssertJsonAreIdentical(_ expression1: String, _ expression2: Data, options: JSONSerialization.WritingOptions? = nil) throws {
+  let data = try XCTUnwrap(expression1.data(using: .utf8))
+  try XCTAssertJsonAreIdentical(data, expression2, options: options)
+}
+
+func XCTAssertJsonAreIdentical(_ expression1: Data, _ expression2: String, options: JSONSerialization.WritingOptions? = nil) throws {
+  let data = try XCTUnwrap(expression2.data(using: .utf8))
+  try XCTAssertJsonAreIdentical(expression1, data, options: options)
+}
+
+func XCTAssertJsonAreIdentical(_ expression1: Data, _ expression2: Data, options: JSONSerialization.WritingOptions? = nil) throws {
+  var defaultOptions: JSONSerialization.WritingOptions = []
+  if #available(iOS 11.0, *) {
+    defaultOptions = [.sortedKeys, .prettyPrinted]
+  } else {
+    defaultOptions = [.prettyPrinted]
+  }
+  XCTAssertEqual(
+    String(data: try JSONSerialization.data(withJSONObject: try JSONSerialization.jsonObject(with: expression1), options: options ?? defaultOptions), encoding: .utf8),
+    String(data: try JSONSerialization.data(withJSONObject: try JSONSerialization.jsonObject(with: expression2), options: options ?? defaultOptions), encoding: .utf8)
+  )
 }
